@@ -23,9 +23,11 @@ C'est un projet universitaire : le code doit rester simple, lisible et facile à
 ## Structure
 
 ```
-index.html          Page d'accueil
-resume.html         CV
-portfolio.html      Projets / réalisations
+index.html          Page d'accueil (Home)
+about.html          Présentation (About)
+experience.html     Parcours et expériences / CV (Experience)
+work.html           Projets / réalisations (Work)
+interests.html      Centres d'intérêt (Interests)
 contact.html        Contact
 assets/
   css/variables.css   Variables CSS (couleurs, typographie, espacements) — source unique des valeurs de design
@@ -43,7 +45,7 @@ Ordre de chargement des CSS dans chaque page : `variables.css`, puis `base.css`,
 ### HTML
 - HTML sémantique : `header`, `nav`, `main`, `section`, `article`, `footer`, une seule `<h1>` par page, hiérarchie de titres respectée.
 - `<html lang="en">`, `<meta charset="UTF-8">`, `<meta name="viewport">`, un `<title>` et une `<meta name="description">` propres à chaque page.
-- Le header et le footer sont identiques sur les 4 pages : toute modification doit être reportée partout. Le lien de la page courante porte `aria-current="page"`.
+- Le header et le footer sont identiques sur les 6 pages : toute modification doit être reportée partout. Le lien de la page courante porte `aria-current="page"`.
 - Indentation de 2 espaces.
 
 ### CSS
