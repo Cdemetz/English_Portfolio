@@ -10,7 +10,8 @@ C'est un projet universitaire : le code doit rester simple, lisible et facile à
 ## Langues
 
 - **Contenu du site : en anglais** (textes, titres, boutons, attributs `alt`, `<title>`, métadonnées). C'est un cours d'anglais : soigner l'orthographe et la grammaire.
-- **Échanges avec moi, messages de commit et commentaires dans le code : en français.**
+- **Messages de commit et commentaires dans le code : en anglais**, par cohérence avec le reste du projet.
+- **Échanges avec moi : en français.**
 
 ## Stack technique
 
@@ -70,4 +71,4 @@ Ordre de chargement des CSS dans chaque page : `variables.css`, puis `base.css`,
 - Avant d'ajouter une nouvelle page, une bibliothèque ou de changer la structure, me demander.
 - Ne jamais inventer d'informations personnelles (expériences, diplômes, dates, coordonnées) : utiliser un texte provisoire clairement marqué `[TODO: ...]` et me le signaler.
 - Après une modification visible, vérifier le rendu sur mobile et sur ordinateur.
-- Commits courts et descriptifs en français (ex. « Ajoute la section projets au portfolio »).
+- Commits courts et descriptifs en anglais, à l'impératif (ex. « Add projects section to portfolio »).
