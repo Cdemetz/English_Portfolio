@@ -98,7 +98,7 @@ Ordre de chargement des CSS dans chaque page : `variables.css`, puis `base.css`,
 
 ### CSS
 - Aucune couleur, taille de police ou espacement « en dur » : utiliser les variables de `variables.css`.
-- Approche mobile-first, avec des media queries pour les écrans plus larges.
+- Approche desktop-first (le site sera évalué sur ordinateur) : styles écrits d'abord pour grand écran, puis adaptés aux écrans plus petits avec des media queries `max-width`.
 - Noms de classes clairs en anglais et en kebab-case (ex. `project-card`, `site-header`).
 - Pas de `!important` sauf cas justifié.
 
@@ -120,5 +120,5 @@ Ordre de chargement des CSS dans chaque page : `variables.css`, puis `base.css`,
 - Faire des changements ciblés : ne pas réécrire ce qui n'est pas concerné par la demande.
 - Avant d'ajouter une nouvelle page, une bibliothèque ou de changer la structure, me demander.
 - Ne jamais inventer d'informations personnelles (expériences, diplômes, dates, coordonnées) : utiliser un texte provisoire clairement marqué `[TODO: ...]` et me le signaler.
-- Après une modification visible, vérifier le rendu sur mobile et sur ordinateur.
+- Après une modification visible, vérifier le rendu en priorité sur ordinateur, puis sur mobile.
 - Commits courts et descriptifs en anglais, à l'impératif (ex. « Add projects section to portfolio »).

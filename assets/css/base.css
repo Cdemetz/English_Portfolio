@@ -1,0 +1,18 @@
+/* Ce fichier contient les styles qui s'applique a tout le site web. 
+Il contient les styles de base pour les éléments HTML tels que le body, les titres, les paragraphes, les liens, etc. 
+Il est utilisé pour définir la mise en page générale et l'apparence du site web. */
+
+body{
+  background-color: var(--color-bg);
+}
+
+ul{
+    display: flex;
+   
+}
+li{
+    padding : 10px;
+    list-style: none;
+    place-items: center;
+  
+}

@@ -1,0 +1,8 @@
+/* Ce fichier contient les variables CSS */
+/* Ces variables permettent de changer facilement les couleurs et les styles de l'application sans avoir à modifier chaque élément individuellement. */
+/* Exemple d'utilisation pour Couleur de fond,texte, typographie etc.. */
+
+:root {
+    --color-bg: #f2f6fd;
+
+}
