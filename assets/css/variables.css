@@ -4,22 +4,50 @@
 :root {
   /* Colors */
   --color-bg: #f5f8fd;
-  --color-text-default: #888e9d;
+  --color-text-default: #5f6573;
   --color-text-hovered: #1f3b78;
   --color-footer-bg: #14285a;
+  --color-footer-strong: #8aabf9;
+  --color-header-butt-contact:rgba(10, 22, 48, 1);
+
+  /* Footer colors */
+  --color-footer-text: #ffffff;
+  --color-footer-link: #d3dcf0;
+  --color-footer-muted: #8a99bd;
+  --color-footer-line: rgba(255, 255, 255, 0.12);
+  --color-footer-button-bg: rgba(255, 255, 255, 0.06);
+  --color-footer-button-bg-hover: rgba(255, 255, 255, 0.14);
+  --color-footer-button-border: rgba(255, 255, 255, 0.25);
+
+  /* Typography */
+  --font-main: "Inter", system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-display: 3.25rem;
+  --font-size-display-mobile: 2rem;
+  --line-height-tight: 1.1;
+  --letter-spacing-wide: 0.12em;
 
   /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-xxl: 6rem;
+
+  /* Shapes */
+  --radius-pill: 999px;
 
   /* Logo */
   --logo-size: 50px;
 
   /* Glass effect (header) */
-  --color-glass: rgba(255, 255, 255, 0.5);
+  --color-glass: rgba(255, 255, 255, 0.85);
   --color-glass-border: rgba(255, 255, 255, 0.125);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* x y blur spread color */
-  --glass-blur: 20px;
+  --glass-blur: 50px;
   --glass-radius: 10px;
 
   /* Animations */

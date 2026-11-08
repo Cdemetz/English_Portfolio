@@ -1,15 +1,20 @@
 /* Reusable components: header, navigation, buttons, footer... */
 
 
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 body {
-  background-color: var(--color-bg); /* fallback while the image loads */
-  /* Temporary test image to preview the glass effect.
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--color-bg);
+    /* fallback while the image loads */
+    /* Temporary test image to preview the glass effect.
      Relative path: works when opening the file locally and on the OVH sub-folder. */
-  /* background-image: url("../img/bg-test.jpg"); */
-  background-size: cover;
-  background-position: center;
-   font-family: 'Inter', sans-serif;
+    /* background-image: url("../img/bg-test.jpg"); */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Inter', sans-serif;
 }
 
 /* ===== Header ===== */
@@ -27,9 +32,8 @@ header {
     /* avoids a 1px jump when the border appears */
     border-radius: var(--glass-radius);
     box-shadow: none;
-    backdrop-filter: blur(0) saturate(100%);
-    -webkit-backdrop-filter: blur(0) saturate(100%);
-    /* older Safari */
+    backdrop-filter: blur(10) saturate(100%);
+
 
     /* Set on the base state so the animation plays in both directions */
     transition-property: background-color, border-color, box-shadow, backdrop-filter;
@@ -44,7 +48,6 @@ header.scrolled {
     border-color: var(--color-glass-border);
     box-shadow: var(--glass-shadow);
     backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
 }
 
 /* Accessibility: respect users who disable animations */
@@ -82,7 +85,7 @@ header.scrolled {
     /* space between each item */
     list-style: none;
     /* remove the bullet points */
-    
+
 }
 
 .nav-links a {
@@ -92,73 +95,176 @@ header.scrolled {
 
 .nav-links a[aria-current="page"] {
     /*[] focus on an attribute, each page has its attribute*/
-  color: var(--color-text-hovered);
+    color: var(--color-text-hovered);
 }
 
 
 .nav-links a:hover,
 .nav-links a:focus-visible {
-  color: var(--color-text-hovered);
-  transition: color var(--transition-duration) var(--transition-ease);
+    color: var(--color-text-hovered);
+    transition: color var(--transition-duration) var(--transition-ease);
 }
 
 
 .nav-contact {
+    color: white;
+    border-radius: var(--glass-radius);
     text-decoration: none;
     border-radius: var(--glass-radius);
     padding: 0.5rem 1rem;
-    margin-right:25px;
-    background-color: var(--color-glass);
+    margin-right: 25px;
+    background-color: var(--color-header-butt-contact);
     border: 1px solid var(--color-glass-border);
     box-shadow: var(--glass-shadow);
     backdrop-filter: blur(var(--glass-blur)) saturate(180%);
 }
 
+.nav-contact:hover {
+    background-color: var(--color-footer-strong);
+    transition: var(--transition-duration) var(--transition-ease);
+
+}
+
 /* ===== Footer ===== */
 
-footer{
-background-color: var( --color-footer-bg);
-color: white;
+footer {
+    background-color: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    padding: var(--space-xxl) var(--space-lg) var(--space-lg);
+    /* also stops margins from leaking out */
 }
 
+/* Three columns: intro (wide), Explore, Connect */
 .footer-main {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr 1fr;
     /* fr = fraction of the available space */
     gap: var(--space-lg);
-
+    padding-bottom: var(--space-xxl);
 }
 
+/* Small uppercase labels: "Have a project...", "Explore", "Connect" */
+.footer-eyebrow,
+.footer-title {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+}
 
+.footer-eyebrow {
+    color: var(--color-footer-strong);
+}
+
+.footer-title {
+    color: var(--color-footer-muted);
+}
+
+.footer-heading {
+    margin: 0 0 var(--space-xl);
+    font-size: var(--font-size-display);
+    font-weight: 400;
+    line-height: var(--line-height-tight);
+}
+
+/* Highlighted word in the heading ("meaningful.") */
+.strong-character {
+    color: var(--color-footer-strong);
+}
+
+/* Pill-shaped "Start a conversation" button */
+.footer-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    border: 1px solid var(--color-footer-button-border);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-footer-button-bg);
+    color: var(--color-footer-text);
+    font-size: var(--font-size-md);
+    text-decoration: none;
+    transition: background-color var(--transition-duration) var(--transition-ease);
+}
+
+.footer-button:hover,
+.footer-button:focus-visible {
+    background-color: var(--color-footer-button-bg-hover);
+}
+
+/* Explore and Connect columns */
 .footer-links,
 .footer-connect {
     display: flex;
     flex-direction: column;
-   
+    align-items: flex-start;
+    gap: var(--space-md);
 }
 
-.footer-title {
-    
-    color: var(--color-text-default);
-    
+.footer-links .footer-title,
+.footer-connect .footer-title {
+    margin-bottom: var(--space-sm);
+    /* the gap already adds space below */
 }
+
 .footer-links a,
-.footer-connect a {
+.footer-connect a,
+.footer-cv {
+    color: var(--color-footer-link);
+    font-size: var(--font-size-sm);
     text-decoration: none;
-    color: white;
-    margin-bottom: var(--space-md);
-    font-size: 12px;
+    transition: color var(--transition-duration) var(--transition-ease);
 }
 
-.footer-CV {
-    text-decoration: none;
-    color: white;
-    font-size: 12px;
-    margin-right: var(--space-md);
+.footer-links a:hover,
+.footer-links a:focus-visible,
+.footer-connect a:hover,
+.footer-connect a:focus-visible,
+.footer-cv:hover,
+.footer-cv:focus-visible {
+    color: var(--color-footer-text);
+    /*focus-visible allows personnes to use only keyboard to navigate*/
 }
 
+/* Small arrow icons next to links */
+.footer-icon {
+    margin-left: var(--space-sm);
+}
+
+/* Bottom bar: copyright, CV link, location */
 .footer-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-footer-line);
+    color: var(--color-footer-muted);
+    font-size: var(--font-size-xs);
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.footer-cv {
+    color: var(--color-footer-text);
+    font-size: var(--font-size-xs);
+}
+
+/* Smaller screens: one column, smaller heading */
+@media (max-width: 768px) {
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+
+    .footer-heading {
+        font-size: var(--font-size-display-mobile);
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
 }

@@ -1,4 +1,21 @@
 /* Global styles applied to the whole site:
    base HTML elements (body, headings, paragraphs, links...) and general layout. */
 
- 
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* padding is included in the width */
+}
+
+body {
+  margin: 0; /* removes the default white band around the page */
+  min-height: 100vh; /* at least the height of the screen */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  font-family: var(--font-main);
+}
+
+main {
+  flex: 1; /* takes the remaining space and pushes the footer to the bottom */
+}
