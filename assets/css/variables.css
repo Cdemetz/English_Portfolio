@@ -1,9 +1,28 @@
-/* Ce fichier contient les variables CSS */
-/* Ces variables permettent de changer facilement les couleurs et les styles de l'application sans avoir à modifier chaque élément individuellement. */
-/* Exemple d'utilisation pour Couleur de fond,texte, typographie etc.. */
+/* Design variables: the single source of every color, size and spacing value.
+   Change a value here and it updates everywhere on the site. */
 
 :root {
-    --color-bg: #f2f6fd;
-    --space-li:1rem;
-    --space-footer: 2rem;
+  /* Colors */
+  --color-bg: #f5f8fd;
+  --color-text-default: #888e9d;
+  --color-text-hovered: #1f3b78;
+  --color-footer-bg: #14285a;
+
+  /* Spacing */
+  --space-md: 1rem;
+  --space-lg: 2rem;
+
+  /* Logo */
+  --logo-size: 50px;
+
+  /* Glass effect (header) */
+  --color-glass: rgba(255, 255, 255, 0.5);
+  --color-glass-border: rgba(255, 255, 255, 0.125);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* x y blur spread color */
+  --glass-blur: 20px;
+  --glass-radius: 10px;
+
+  /* Animations */
+  --transition-duration: 0.4s;
+  --transition-ease: cubic-bezier(0.25, 1, 0.5, 1); /* fast start, long smooth end */
 }

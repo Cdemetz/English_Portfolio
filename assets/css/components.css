@@ -1,48 +1,160 @@
-/* Ce fichier permet de styler tous les éléments de classe ou d'identifiant de la page web. */
+/* Reusable components: header, navigation, buttons, footer... */
 
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+body {
+  background-color: var(--color-bg); /* fallback while the image loads */
+  /* Temporary test image to preview the glass effect.
+     Relative path: works when opening the file locally and on the OVH sub-folder. */
+  /* background-image: url("../img/bg-test.jpg"); */
+  background-size: cover;
+  background-position: center;
+   font-family: 'Inter', sans-serif;
+}
+
+/* ===== Header ===== */
+
+header {
+    position: sticky;
+    /* stays at the top of the page when scrolling */
+    top: 25px;
+    z-index: 100;
+    /* always above the rest of the page */
+
+    /* Starting state: invisible but animatable */
+    background-color: transparent;
+    border: 1px solid transparent;
+    /* avoids a 1px jump when the border appears */
+    border-radius: var(--glass-radius);
+    box-shadow: none;
+    backdrop-filter: blur(0) saturate(100%);
+    -webkit-backdrop-filter: blur(0) saturate(100%);
+    /* older Safari */
+
+    /* Set on the base state so the animation plays in both directions */
+    transition-property: background-color, border-color, box-shadow, backdrop-filter;
+    transition-duration: var(--transition-duration);
+    transition-timing-function: var(--transition-ease);
+
+}
+
+/* Glass effect, added by main.js once the page is scrolled */
+header.scrolled {
+    background-color: var(--color-glass);
+    border-color: var(--color-glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+}
+
+/* Accessibility: respect users who disable animations */
+@media (prefers-reduced-motion: reduce) {
+    header {
+        transition: none;
+    }
+}
 
 .logo {
-    display: flex;
-    width: 100px;
-    height: 100px;
-    background-image: url("../img/Logo_DEMETZ_CLEMENT.png");
+    display: block;
+    width: var(--logo-size);
+    height: var(--logo-size);
+    background-image: url("../img/logo-clement-demetz.png");
     background-size: cover;
     background-position: center;
-    display: block;
+    margin: 0 var(--space-md);
 }
+
+/* ===== Navigation ===== */
 
 .site-nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* logo left, links middle, button right */
+
+
 }
 
 .nav-links {
     display: flex;
-    /*display all items in a row */
-    gap: var(--space-li);
-    /* add space between each item */
+    /* display all items in a row */
+    gap: var(--space-md);
+    /* space between each item */
     list-style: none;
-    /* delete the bullet points of the list */
+    /* remove the bullet points */
+    
+}
 
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-text-default);
+}
+
+.nav-links a[aria-current="page"] {
+    /*[] focus on an attribute, each page has its attribute*/
+  color: var(--color-text-hovered);
+}
+
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--color-text-hovered);
+  transition: color var(--transition-duration) var(--transition-ease);
+}
+
+
+.nav-contact {
+    text-decoration: none;
+    border-radius: var(--glass-radius);
+    padding: 0.5rem 1rem;
+    margin-right:25px;
+    background-color: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+}
+
+/* ===== Footer ===== */
+
+footer{
+background-color: var( --color-footer-bg);
+color: white;
 }
 
 .footer-main {
-    
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr; /* fr mens fraction of the available space of the windows*/
-    gap: var(--space-footer);
-}
-
-.footer-links {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 2fr 1fr 1fr;
+    /* fr = fraction of the available space */
+    gap: var(--space-lg);
 
 }
 
+
+.footer-links,
 .footer-connect {
     display: flex;
     flex-direction: column;
+   
+}
+
+.footer-title {
+    
+    color: var(--color-text-default);
+    
+}
+.footer-links a,
+.footer-connect a {
+    text-decoration: none;
+    color: white;
+    margin-bottom: var(--space-md);
+    font-size: 12px;
+}
+
+.footer-CV {
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    margin-right: var(--space-md);
 }
 
 .footer-bottom {
