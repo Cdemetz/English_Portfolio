@@ -25,6 +25,7 @@ header {
     top: 25px;
     z-index: 100;
     /* always above the rest of the page */
+    height: 60px;
 
     /* Starting state: invisible but animatable */
     background-color: transparent;
@@ -267,4 +268,18 @@ footer {
         flex-direction: column;
         text-align: center;
     }
+}
+
+
+/* ===== Section hero ===== */
+h1{
+    display: block;
+    color:var(--color-header-butt-contact);
+    margin-bottom: 30px;
+    font-size: 7.2vw;
+    letter-spacing: -.066em;
+    font-weight: 700;
+}
+.strong-hero {
+    color: var(--color-footer-strong);
 }
