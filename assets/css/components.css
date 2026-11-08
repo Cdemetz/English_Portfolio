@@ -1,1 +1,52 @@
 /* Ce fichier permet de styler tous les éléments de classe ou d'identifiant de la page web. */
+
+
+.logo {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background-image: url("../img/Logo_DEMETZ_CLEMENT.png");
+    background-size: cover;
+    background-position: center;
+    display: block;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    /*display all items in a row */
+    gap: var(--space-li);
+    /* add space between each item */
+    list-style: none;
+    /* delete the bullet points of the list */
+
+}
+
+.footer-main {
+    
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr; /* fr mens fraction of the available space of the windows*/
+    gap: var(--space-footer);
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.footer-connect {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

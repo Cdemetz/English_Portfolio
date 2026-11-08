@@ -6,13 +6,5 @@ body{
   background-color: var(--color-bg);
 }
 
-ul{
-    display: flex;
-   
-}
-li{
-    padding : 10px;
-    list-style: none;
-    place-items: center;
-  
-}
+
+

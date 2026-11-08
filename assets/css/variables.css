@@ -4,5 +4,6 @@
 
 :root {
     --color-bg: #f2f6fd;
-
+    --space-li:1rem;
+    --space-footer: 2rem;
 }
