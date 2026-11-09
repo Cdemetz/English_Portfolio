@@ -30,7 +30,7 @@
   --line-height-tight: 1.1;
   --letter-spacing-wide: 0.12em;
 
-  /* Spacing */
+  /* Spacing . rem is the root em unit, if user change the size of the global font, spacing scales accordingly */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -54,4 +54,7 @@
   /* Animations */
   --transition-duration: 0.4s;
   --transition-ease: cubic-bezier(0.25, 1, 0.5, 1); /* fast start, long smooth end */
+
+  /* Margin from the left */
+  --margin-left: 60px;
 }
