@@ -346,3 +346,24 @@ h1 {
     color: var(--color-bg);
 
 }
+
+.scroll-hint {
+  display: flex;
+  flex-direction: column;   /* text above, line below */
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.scroll-hint-text{
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-footer-muted);
+    margin-top: 50px;
+}
+
+.scroll-hint-line {
+  display: block;           /* a span is inline by default: no width/height */
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--color-footer-strong), transparent);
+}
