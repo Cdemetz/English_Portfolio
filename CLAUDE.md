@@ -36,7 +36,6 @@ Tout le contenu du CV PDF doit se retrouver sur le site, pas forcément dans le 
 - **Projets obligatoires :** ce site lui-même (avec ses infos techniques) et le projet universitaire de BUT2 présenté comme étude de cas.
 - Les meilleurs projets en premier (pas forcément dans l'ordre chronologique). Les projets non terminés, perso ou non rémunérés sont acceptés.
 - **Filtre par technologie** : c'est ce qui donne les 3 points (une simple rubrique « technos » = 2 pts, des technos citées seulement dans le texte = 1 pt).
-- Sans JavaScript, tous les projets et leurs détails doivent rester visibles.
 
 ### Grille d'évaluation (/40)
 
@@ -103,8 +102,6 @@ Ordre de chargement des CSS dans chaque page : `variables.css`, puis `base.css`,
 - Pas de `!important` sauf cas justifié.
 
 ### JavaScript
-- JS vanilla moderne (`const`/`let`, fonctions fléchées, `addEventListener`), pas de jQuery.
-- Le site doit rester utilisable si le JavaScript est désactivé (le JS améliore, il n'est pas indispensable).
 - Pas d'erreur dans la console.
 
 ### Accessibilité
