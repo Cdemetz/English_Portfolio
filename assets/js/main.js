@@ -7,4 +7,3 @@ const updateHeader = () => {
 
 window.addEventListener("scroll", updateHeader);
 updateHeader(); // also check on page load (e.g. after a refresh mid-page)
-
