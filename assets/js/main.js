@@ -66,6 +66,12 @@ if (grid) {
       image.alt = "Screenshot of " + project.title;
     }
 
+        // Date and duration
+    const meta = addElement(card, "div", "project-meta");
+    addElement(meta, "span", "project-date", project.date);
+    addElement(meta, "span", "project-time", project.time);
+
+
     // Main text
     const copy = addElement(card, "div", "project-copy");
     addElement(copy, "h3", "project-title", project.title);
@@ -81,9 +87,5 @@ if (grid) {
     addElement(copy, "span", "project-group", project.group);
     addElement(copy, "button", "project-button", "View details");
 
-    // Date and duration
-    const meta = addElement(card, "div", "project-meta");
-    addElement(meta, "span", "project-date", project.date);
-    addElement(meta, "span", "project-time", project.time);
   });
 }
