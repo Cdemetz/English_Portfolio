@@ -30,7 +30,43 @@
   </header>
 
   <main>
-    <!-- Page content goes here -->
+    <section class="page-intro">
+      <div class="top">
+        <span></span>
+        <p>Portfolio</p>
+      </div>
+      <h1>Selected work</h1>
+      <p class="page-intro-text">A selection of my university, team and personal projects, from web development to
+        case studies.</p>
+    </section>
+
+    <!-- Technology filter: the chosen technology sits in the center,
+         the matching projects orbit around it (generated in main.js) -->
+    <section class="orbit-section" aria-labelledby="orbit-heading">
+      <h2 id="orbit-heading" class="visually-hidden">Projects by technology</h2>
+
+      <div class="orbit">
+        <div class="orbit-ring" aria-hidden="true"></div>
+
+        <div class="orbit-center">
+          <label class="orbit-label" for="tech-filter">Technology</label>
+          <select class="orbit-select" id="tech-filter">
+            <option value="all">All</option>
+          </select>
+          <p class="orbit-count" aria-live="polite"></p>
+        </div>
+
+        <ul class="orbit-projects"></ul>
+      </div>
+    </section>
+
+    <!-- Project pop-up: filled by main.js with the clicked project -->
+    <dialog class="project-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" type="button" aria-label="Close the project details">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="dialog-body"></div>
+    </dialog>
   </main>
 
   <footer>

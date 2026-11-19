@@ -8,34 +8,227 @@ const updateHeader = () => {
 window.addEventListener("scroll", updateHeader);
 updateHeader(); // also check on page load (e.g. after a refresh mid-page)
 
-let technologies = ['C#.NET', 'SQL', 'HTML', 'CSS', 'PHP', 'JS', 'WPF', 'UML'];
+// ---------------------------------------------------------------
+// TECHNOLOGIES
+// One single list, used by the project cards AND later by the
+// filters. Each project refers to a key (TECH.sql) instead of an
+// index (technologies[1]): easier to read, and no wrong index.
+// ---------------------------------------------------------------
+const TECH = {
+  csharp: "C# / .NET",
+  wpf: "WPF",
+  html: "HTML",
+  css: "CSS",
+  js: "JavaScript",
+  php: "PHP",
+  laravel: "Laravel",
+  sql: "SQL",
+  postgres: "PostgreSQL",
+  merise: "Merise",
+  uml: "UML",
+  powerAmc: "PowerAMC",
+  visualParadigm: "Visual Paradigm",
+  powerBi: "Power BI",
+  msProject: "MS Project",
+  figma: "Figma",
+  ssh: "SSH",
+  gdpr: "GDPR",
+};
 
-let links = [];
+// ---------------------------------------------------------------
+// TECHNOLOGY CATEGORIES (used by the Work page filter)
+// The cards and the pop-up show the precise technologies; the filter
+// only offers these few categories so the visitor is not lost.
+// A project belongs to a category if it uses at least one of its tools.
+// ---------------------------------------------------------------
+const CATEGORIES = [
+  { name: "Web development", technologies: [TECH.html, TECH.css, TECH.js, TECH.php, TECH.laravel, TECH.ssh] },
+  { name: "Software development", technologies: [TECH.csharp, TECH.wpf] },
+  { name: "Data & databases", technologies: [TECH.sql, TECH.postgres, TECH.powerBi, TECH.gdpr] },
+  { name: "System design", technologies: [TECH.uml, TECH.merise, TECH.powerAmc, TECH.visualParadigm] },
+  { name: "UI / UX design", technologies: [TECH.figma] },
+  { name: "Project management", technologies: [TECH.msProject] },
+];
 
-let medias = [];
 
-
-let projects = [
+// ---------------------------------------------------------------
+// PROJECTS (best project first)
+// ---------------------------------------------------------------
+const projects = [
   {
     id: 1,
-    media: "", // e.g. "assets/img/projects/management-project.webp"
-    date: "April 2026",
-    time: "3 mounths",
-    title: "Management Project",
-    description: "Analyze the needs of a furniture company. Specify requirements in the project management document.",
-    technologies: [technologies[1], technologies[7]], // references to the technologies array
-    type: "University Project",
-    group: "3 persons",
+    media: "", // e.g. "assets/img/projects/sae-301.webp"
+    date: "Oct 2026 – Feb 2027",
+    time: "5 months",
+    title: "E-Commerce Website for a Smartphone Retailer",
+    description: "A five-month team project to design, develop and deploy a complete e-commerce website, from UML modeling to GDPR compliance.",
+    technologies: [TECH.uml, TECH.sql, TECH.postgres, TECH.powerAmc, TECH.laravel, TECH.html, TECH.css, TECH.js, TECH.csharp, TECH.wpf, TECH.powerBi, TECH.ssh, TECH.gdpr],
+    type: "University project – SAÉ 3.01",
+    group: "Team of 5",
 
-    //pop-up
-    context: "",
-    myRole: "",
-    links: "",
-  }
-  // add other project
-  // the main structur about project-card
+    // pop-up
+    context: "SAÉ 3.01 is the largest project of the second year of my degree. In a team of five, we are rebuilding the e-commerce website of a smartphone retailer from scratch, showcasing a selection of its computers, smartphones and accessories, in conditions close to a real professional project. It brings together every subject of the course: development, databases, networks, law and communication.",
+    objectives: "Model the system with UML, build a GDPR-compliant database, develop the website and deploy it on a server, integrate a chatbot, secure passwords with cryptography, and write all the legal and user documentation.",
+    myRole: "Co-project manager, alongside a teammate. I assign roles and tasks, set deadlines and track the progress of new features.",
+    tasks: [
+      "Designed the UML diagrams and the conceptual data model (MCD)",
+      "Wrote the privacy policy and the record of processing activities (GDPR)",
+      "Assigned roles and tasks, and followed up with each team member",
+    ],
+    keyFeatures: [
+      "Product catalog of computers, smartphones and accessories",
+      "Record of processing activities and data protection policy",
+      "Cookie and user consent management",
+      "Chatbot integrated into the website",
+      "More features to come: the project is still in progress",
+    ],
+    organization: "Agile approach with one-week development sprints, led by two co-project managers.",
+    challenge: "Sharing roles and tasks fairly within a team of five and meeting every deadline. The design phase was also complex, as GDPR and legal requirements had to be considered before any development could start.",
+    learned: "How to combine many technologies and tools in a complex, real-world project. I also learned that communication is essential to a team's success, and that listening to others helps me understand their difficulties and needs.",
+    result: "In progress – delivery planned for February 2027.",
+    links: [],
+  },
 
-]
+  {
+    id: 2,
+    media: "",
+    date: "April – May 2026",
+    time: "2 months",
+    title: "Sales Tablet Application",
+    description: "A WPF tablet application that lets sales staff create quotes, manage customers and browse the product catalog.",
+    technologies: [TECH.csharp, TECH.wpf, TECH.postgres, TECH.figma],
+    type: "University project – SAÉ 2.01",
+    group: "Team of 3",
+
+    // pop-up
+    context: "As part of the redesign of a furniture company's information system, our team developed the sales and administration module of the new solution. The application was designed for tablets and connected to a database designed beforehand.",
+    objectives: "Develop a desktop application in WPF and work with datasets to query the company's PostgreSQL database.",
+    myRole: "Informal team leader. Tasks were shared equally and each member worked autonomously; I was in charge of the entire user interface.",
+    tasks: [
+      "Designed the mockup of the application in Figma",
+      "Developed the entire user interface in WPF",
+      "Integrated the database data into the application",
+    ],
+    keyFeatures: [
+      "Secure login with two roles: sales representative and manager",
+      "Quote creation and list of quotes",
+      "Customer creation and list of customers",
+      "Product catalog with a shopping cart",
+      "Data grids with filters by date and customer name",
+      "Admin panel to add, edit or delete product categories, quote statuses and customers",
+    ],
+    organization: "Collaborative team work with a fixed deadline and tasks shared equally.",
+    challenge: "Connecting the PostgreSQL database to the WPF project and displaying the data correctly in the interface.",
+    learned: "How to connect a database to an application, and why designing a mockup first makes development much easier.",
+    result: "Completed.",
+    links: [],
+  },
+
+  {
+    id: 3,
+    media: "",
+    date: "April – May 2026",
+    time: "2 months",
+    title: "Database Design & Power BI Dashboard",
+    description: "A new customer and order database for a furniture company, analyzed through an interactive Power BI dashboard.",
+    technologies: [TECH.sql, TECH.postgres, TECH.merise, TECH.powerAmc, TECH.powerBi],
+    type: "University project – SAÉ 2.04",
+    group: "Team of 3",
+
+    // pop-up
+    context: "For the same furniture company as in SAÉ 2.05, our team designed the new database for customers and orders, then turned its data into a dashboard to support business decisions.",
+    objectives: "Design the data model, write the SQL script, fill the database with consistent and compliant data, then explore and present the results in a dashboard.",
+    myRole: "Team member in a group of three, with tasks shared equally.",
+    tasks: [
+      "Designed the conceptual data model (MCD)",
+      "Wrote the SQL script: tables, constraints, checks, inserts and updates",
+      "Generated a large, realistic dataset with GenerateData",
+      "Analyzed the data and built the Power BI dashboard",
+    ],
+    keyFeatures: [
+      "Relational database for customers and orders",
+      "Data integrity rules (constraints and checks)",
+      "Dashboard on sales performance, customers and order locations",
+      "Oral presentation of the dashboard, entirely in English",
+    ],
+    organization: "Collaborative team work with a fixed deadline, without a specific method.",
+    challenge: "Generating a large volume of data that remained consistent with all the constraints of the SQL script.",
+    learned: "How to create and administer a database, and how data can support a company's analysis and decisions.",
+    result: "Our teacher now uses our Power BI presentation as an example for other students.",
+    links: [],
+  },
+
+  {
+    id: 4,
+    media: "",
+    date: "November 2026",
+    time: "1 month",
+    title: "Personal Portfolio Website",
+    description: "This website: a hand-coded portfolio in HTML, CSS and vanilla JavaScript, built to present my work to international recruiters.",
+    technologies: [TECH.html, TECH.css, TECH.js, TECH.php, TECH.figma],
+    type: "University project – English module",
+    group: "Solo project",
+
+    // pop-up
+    context: "Created for my professional English module, this portfolio presents my projects, skills and experience to recruiters abroad. The goal is to stand out and make them want to work with me.",
+    objectives: "Build a website with HTML, CSS and JavaScript only, with no framework and no CMS, and learn how to code a website from scratch.",
+    myRole: "Sole designer and developer.",
+    tasks: [
+      "Researched design trends and created mockups and prototypes in Figma",
+      "Wrote the HTML structure and developed the design in CSS",
+      "Added JavaScript features to automate repetitive tasks",
+      "Bought a domain name and optimized the website for search engines (SEO)",
+    ],
+    keyFeatures: [
+      "Project cards generated automatically with JavaScript",
+      "Pop-up window with the details of each project",
+      "Contact form",
+    ],
+    organization: "Weekly Scrum sprints tracked on a Miro board, with the code versioned on GitHub.",
+    challenge: "Finding design inspiration and building a clear, concise structure for visitors. I solved it with a research phase on Awwwards, Pinterest and other web design sites, followed by mockups in Figma.",
+    learned: "Many CSS and JavaScript techniques, and how to make my portfolio stand out from other students' work.",
+    result: "Online at clement-demetz.com.",
+    links: [
+      { label: "Live website", url: "https://clement-demetz.com" },
+      { label: "GitHub repository", url: "https://github.com/Cdemetz/English_Portfolio" },
+    ],
+  },
+
+  {
+    id: 5,
+    media: "",
+    date: "April – May 2026",
+    time: "2 months",
+    title: "Project Management & Requirements Analysis",
+    description: "Analysis of a furniture company's needs, leading to a requirements specification and a complete project management plan.",
+    technologies: [TECH.uml, TECH.visualParadigm, TECH.msProject, TECH.figma],
+    type: "University project – SAÉ 2.05",
+    group: "Team of 3",
+
+    // pop-up
+    context: "Our team studied how a furniture company currently works: its structure, its activity, and the roles of the project owner (MOA) and the project contractor (MOE). The aim was to prepare a new version of its information system.",
+    objectives: "Understand the existing system, identify the expected improvements, and propose the changes required for a new version of the company's information system.",
+    myRole: "Team leader. I assigned roles and goals, adapted each person's tasks to their strengths, and made sure we met every deadline.",
+    tasks: [
+      "Built the project schedule in MS Project",
+      "Designed a Figma mockup of the company's new solution",
+      "Modeled the organization with UML activity, use case and deployment diagrams",
+    ],
+    keyFeatures: [
+      "Requirements specification",
+      "Project management file",
+      "Project schedule in MS Project",
+      "UML diagrams and Figma mockup",
+    ],
+    organization: "Autonomous team work with a fixed deadline; I naturally took the lead to guide the project.",
+    challenge: "Defining the company's new needs and the changes required to meet them.",
+    learned: "How to lead a project from the analysis phase: understanding a client's needs, planning the work and organizing a team.",
+    result: "Completed.",
+    links: [
+      { label: "Figma mockup", url: "https://www.figma.com/design/Smz3RSJhZGaudyz9FvI1Be/Sans-titre?node-id=0-1&t=BrLQy0Te1uNKiJDW-1" },
+    ],
+  },
+];
 
 
 // Create an element, give it a class and a text (both optional),
@@ -50,6 +243,9 @@ const addElement = (parent, tag, className, text) => {
   return element;
 };
 
+
+// Maximum number of technology tags shown on a home page card
+const MAX_CARD_TAGS = 3;
 
 // Build one card per project inside the grid (only on pages that have it)
 const grid = document.querySelector(".projects-preview-grid");
@@ -77,15 +273,264 @@ if (grid) {
     addElement(copy, "h3", "project-title", project.title);
     addElement(copy, "p", "project-description", project.description);
 
-    // One tag per technology
+    // Only the first 3 technologies on the card (the full list stays in
+    // the data for the filter and the pop-up), then "…" if there are more
     const techList = addElement(copy, "ul", "project-tags");
-    project.technologies.forEach((tech) => {
+    project.technologies.slice(0, MAX_CARD_TAGS).forEach((tech) => {
       addElement(techList, "li", "project-tag", tech);
     });
 
+    const hiddenCount = project.technologies.length - MAX_CARD_TAGS;
+    if (hiddenCount > 0) {
+      const more = addElement(techList, "li", "project-tag");
+      more.classList.add("project-tag-more");
+      more.title = project.technologies.slice(MAX_CARD_TAGS).join(", "); // full list on hover
+      addElement(more, "span", "", "…").setAttribute("aria-hidden", "true");
+      addElement(more, "span", "visually-hidden", "and " + hiddenCount + " more");
+    }
+
     addElement(copy, "span", "project-type", project.type);
     addElement(copy, "span", "project-group", project.group);
-    addElement(copy, "button", "project-button", "View details");
-
+    // Link to this project on the Work page: the #project-1 part will
+    // be used later to open the right pop-up when the page loads
+    const link = addElement(copy, "a", "project-link", "View details");
+    link.href = "work.html#project-" + project.id;
+    link.setAttribute("aria-label", "View details of " + project.title);
+    const arrow = addElement(link, "span", "project-link-arrow", "→");
+    arrow.setAttribute("aria-hidden", "true"); // decorative: not read aloud
   });
+
+  // Last item at the end of the horizontal scroll: link to all projects
+  const viewAll = addElement(grid, "a", "projects-view-all");
+  viewAll.href = "work.html";
+  const viewAllIcon = addElement(viewAll, "span", "projects-view-all-icon", "→");
+  viewAllIcon.setAttribute("aria-hidden", "true");
+  addElement(viewAll, "span", "projects-view-all-text", "View all my projects");
+}
+
+// ---------------------------------------------------------------
+// HORIZONTAL SCROLL OF THE PROJECT CARDS (home page only)
+// The section is pinned on screen (CSS sticky) and the vertical
+// scroll inside it moves the cards to the left.
+// ---------------------------------------------------------------
+const section = document.querySelector(".projects-preview");
+
+// Number of pixels the cards must travel until the last one is visible
+let distance = 0;
+
+// Move the cards according to how far we have scrolled inside the section
+const moveCards = () => {
+  // top of the section relative to the top of the screen:
+  // 0 when it reaches the top, then -100, -200... as we keep scrolling
+  const scrolled = -section.getBoundingClientRect().top;
+
+  // never before the first card (0), never after the last one (distance)
+  const progress = Math.min(Math.max(scrolled, 0), distance);
+
+  grid.style.transform = `translateX(-${progress}px)`;
+};
+
+// Measure the cards and give the section the height needed to scroll through them
+const setupHorizontalScroll = () => {
+  // full width of the row of cards - visible width
+  // (scrollWidth forgets the right padding, so we add it back:
+  // the last card then stops with the same gap as the first one)
+  const paddingRight = parseFloat(getComputedStyle(grid).paddingRight);
+  distance = Math.max(grid.scrollWidth + paddingRight - grid.clientWidth, 0);
+
+  // one screen to stay pinned + the distance to travel
+  section.style.height = window.innerHeight + distance + "px";
+
+  moveCards();
+};
+
+if (section && grid) {
+  setupHorizontalScroll();
+  window.addEventListener("load", setupHorizontalScroll);   // fonts and images change the widths
+  window.addEventListener("resize", setupHorizontalScroll); // new screen size = new distance
+  window.addEventListener("scroll", moveCards);
+}
+
+
+// ---------------------------------------------------------------
+// WORK PAGE: TECHNOLOGY FILTER IN ORBIT
+// The chosen category sits in the center (drop-down list) and the
+// matching projects orbit around it. The slow rotation is a CSS
+// animation; JS only decides which projects are shown and where.
+// ---------------------------------------------------------------
+const orbitList = document.querySelector(".orbit-projects");
+const techFilter = document.querySelector("#tech-filter");
+const orbitCount = document.querySelector(".orbit-count");
+
+// Does this project use at least one tool of this category?
+const isInCategory = (project, categoryName) => {
+  const category = CATEGORIES.find((item) => item.name === categoryName);
+  return project.technologies.some((tech) => category.technologies.includes(tech));
+};
+
+if (orbitList && techFilter) {
+  // 1. Fill the drop-down list with the categories that have at least one project
+  CATEGORIES
+    .filter((category) => projects.some((project) => isInCategory(project, category.name)))
+    .forEach((category) => {
+      const option = addElement(techFilter, "option", "", category.name);
+      option.value = category.name;
+    });
+
+  // 2. Create one tile per project, once. We keep each tile with its
+  //    project so the filter can show or hide it later.
+  const orbitItems = projects.map((project) => {
+    const item = addElement(orbitList, "li", "orbit-item");
+    const tile = addElement(item, "a", "orbit-tile");
+    tile.href = "#project-" + project.id; // opens the pop-up (see below)
+
+    const media = addElement(tile, "div", "orbit-tile-media");
+    if (project.media) {
+      const image = addElement(media, "img");
+      image.src = project.media;
+      image.alt = ""; // the title just below already describes the link
+    }
+    addElement(tile, "span", "orbit-tile-date", project.date);
+    addElement(tile, "span", "orbit-tile-title", project.title);
+    addElement(tile, "span", "orbit-tile-type", project.type);
+
+    const more = addElement(tile, "span", "orbit-tile-more", "View details ");
+    addElement(more, "span", "orbit-tile-arrow", "→").setAttribute("aria-hidden", "true");
+
+    return { project, item };
+  });
+
+  // 3. Show the projects of the chosen category, evenly spread on the circle
+  const updateOrbit = () => {
+    const choice = techFilter.value;
+    const visibleItems = orbitItems.filter(({ project }) =>
+      choice === "all" || isInCategory(project, choice)
+    );
+
+    // hide everything, then show and place the matching projects
+    orbitItems.forEach(({ item }) => item.classList.add("is-hidden"));
+
+    visibleItems.forEach(({ item }, index) => {
+      // e.g. 4 projects → 0°, 90°, 180°, 270° (minus 90° to start at the top)
+      const angle = (360 / visibleItems.length) * index - 90;
+      item.style.setProperty("--angle", angle + "deg");
+      item.classList.remove("is-hidden");
+    });
+
+    const total = visibleItems.length;
+    orbitCount.textContent = total + (total > 1 ? " projects" : " project");
+  };
+
+  techFilter.addEventListener("change", updateOrbit);
+  updateOrbit(); // first display: "All"
+}
+
+
+// ---------------------------------------------------------------
+// WORK PAGE: PROJECT POP-UP
+// Native <dialog> element: showModal() darkens the page, keeps the
+// keyboard inside the pop-up and closes it with the Escape key.
+// A link to "#project-3" (home cards, orbit tiles) opens project 3.
+// ---------------------------------------------------------------
+const dialog = document.querySelector(".project-dialog");
+const dialogBody = document.querySelector(".dialog-body");
+const dialogClose = document.querySelector(".dialog-close");
+
+// A titled paragraph, only added if the text is not empty
+const addBlock = (parent, heading, text) => {
+  if (!text) return;
+  const block = addElement(parent, "div", "dialog-block");
+  addElement(block, "h3", "dialog-heading", heading);
+  addElement(block, "p", "dialog-text", text);
+};
+
+// A titled bullet list, only added if the list is not empty
+const addListBlock = (parent, heading, items) => {
+  if (!items || items.length === 0) return;
+  const block = addElement(parent, "div", "dialog-block");
+  addElement(block, "h3", "dialog-heading", heading);
+  const list = addElement(block, "ul", "dialog-list");
+  items.forEach((text) => addElement(list, "li", "", text));
+};
+
+// Fill the pop-up with one project, then open it
+const openProject = (project) => {
+  dialogBody.innerHTML = ""; // remove the previous project
+
+  // Screenshot
+  const media = addElement(dialogBody, "div", "dialog-media");
+  if (project.media) {
+    const image = addElement(media, "img");
+    image.src = project.media;
+    image.alt = "Screenshot of " + project.title;
+  }
+
+  // Summary: type of work, title, dates, description, all technologies
+  const intro = addElement(dialogBody, "div", "dialog-intro");
+  addElement(intro, "p", "dialog-eyebrow", project.type + " · " + project.group);
+  const title = addElement(intro, "h2", "dialog-title", project.title);
+  title.id = "dialog-title"; // the <dialog> is labelled by this title
+  addElement(intro, "p", "dialog-dates", project.date + " · " + project.time);
+  addElement(intro, "p", "dialog-description", project.description);
+  const tags = addElement(intro, "ul", "project-tags");
+  project.technologies.forEach((tech) => addElement(tags, "li", "project-tag", tech));
+
+  // Details: the story on the left, the key facts on the right
+  const columns = addElement(dialogBody, "div", "dialog-columns");
+
+  const story = addElement(columns, "div", "dialog-main");
+  addBlock(story, "Context", project.context);
+  addBlock(story, "Objectives", project.objectives);
+  addBlock(story, "My role", project.myRole);
+  addListBlock(story, "What I did", project.tasks);
+  addBlock(story, "Challenge", project.challenge);
+  addBlock(story, "What I learned", project.learned);
+
+  const facts = addElement(columns, "div", "dialog-aside");
+  addListBlock(facts, "Key features", project.keyFeatures);
+  addBlock(facts, "Organization", project.organization);
+  addBlock(facts, "Result", project.result);
+
+  // External links: a bar of buttons stuck to the bottom of the pop-up,
+  // always visible while reading. The first link is the main button.
+  if (project.links.length > 0) {
+    const actions = addElement(dialogBody, "div", "dialog-actions");
+    project.links.forEach((link, index) => {
+      const button = addElement(actions, "a", "dialog-button", link.label);
+      if (index === 0) button.classList.add("dialog-button-primary");
+      button.href = link.url;
+      button.target = "_blank";
+      button.rel = "noopener";
+      addElement(button, "span", "dialog-button-icon", "↗").setAttribute("aria-hidden", "true");
+      addElement(button, "span", "visually-hidden", "(opens in a new tab)");
+    });
+  }
+
+  dialog.showModal();
+  dialogBody.scrollTop = 0; // always start at the top of the pop-up
+};
+
+// Read "#project-3" in the address bar and open project 3
+const openFromHash = () => {
+  const id = Number(window.location.hash.replace("#project-", ""));
+  const project = projects.find((item) => item.id === id);
+  if (project) openProject(project);
+};
+
+if (dialog) {
+  dialogClose.addEventListener("click", () => dialog.close());
+
+  // a click on the dark background (outside the white box) closes the pop-up
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+
+  // once closed (button, Escape or background), remove "#project-3" from
+  // the address, so clicking the same tile again opens it again
+  dialog.addEventListener("close", () => {
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  });
+
+  window.addEventListener("hashchange", openFromHash); // click on a tile
+  openFromHash(); // arrival from a home page card (work.html#project-3)
 }

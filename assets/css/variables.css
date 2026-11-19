@@ -42,6 +42,32 @@
   /* Shapes */
   --radius-pill: 999px;
 
+  /* Project cards */
+  /* 3 full cards + half of the 4th on any screen: (screen - side spaces) / 3.5, between 320px and 500px */
+  --card-width: clamp(320px, calc((100vw - 10rem) / 3.5), 500px);
+  --card-media-height: min(220px, 18vh); /* smaller image on short screens */
+  --card-radius: 24px;
+  --color-card-bg: #ffffff;
+  --color-card-border: rgba(20, 40, 90, 0.12);
+  --card-shadow: 0 10px 30px rgba(20, 40, 90, 0.08);
+  --view-all-size: 72px; /* round arrow button at the end of the cards */
+
+  /* Work page: technology orbit */
+  --orbit-size: min(760px, 90vw);        /* width and height of the whole orbit */
+  --orbit-tile-width: 190px;
+  --orbit-tile-media-height: 100px;
+  --orbit-radius: calc(var(--orbit-size) / 2 - var(--orbit-tile-width) / 2);
+  --orbit-center-size: 240px;
+  --orbit-duration: 150s;                /* one full turn: very slow on purpose */
+  --orbit-move-duration: 0.8s;           /* tiles moving to their new place after a filter */
+
+  /* Project pop-up */
+  --dialog-width: 960px;
+  --dialog-media-height: 260px;
+  --dialog-close-size: 40px;
+  --color-backdrop: rgba(10, 22, 48, 0.55); /* dark veil behind the pop-up */
+  --font-size-xl: 2rem;
+
   /* Logo */
   --logo-size: 50px;
 

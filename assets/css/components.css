@@ -371,63 +371,151 @@ h1 {
 }
 
 
-.project-card {
-    height: 700px;
-    width: 600px;
-    border: solid 2px black;
-    border-radius: 25px;
-    margin-left: 150px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
+/* ---------- Project cards ---------- */
 
-.project-media {
-    height: 300px;
-}
-
-.project-meta {
+/* The row of cards: all cards side by side on one line */
+.projects-preview-grid {
     display: flex;
-    font-size: var(--font-size-lg);
-    padding: var(--space-md) var(--space-md) 0 var(--space-xl);
-    /* space on top right bottom left*/
-    color: var(--color-text-default);
+    gap: var(--space-lg);
+    padding: var(--space-md) var(--space-xl);
 }
 
-.project-date {
-
-    margin-right: auto;
+.project-card {
+    flex-shrink: 0; /* keep the card width, never squeeze it to fit the screen */
+    width: var(--card-width);
+    display: flex;
+    flex-direction: column; /* media, text and meta stacked */
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden; /* the image follows the rounded corners */
 }
 
-.project-time {
-    margin-left: auto;
+/* Image area (grey placeholder until the images are added) */
+.project-media {
+    height: var(--card-media-height);
+    background-color: var(--color-bg);
 }
 
+.project-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fill the area without distorting the image */
+}
+
+/* Text area: grows so every card in the row has the same height */
 .project-copy {
-    padding:var(--space-lg) var(--space-xl) var(--space-xl) var(--space-xl);
-    font-size: var(--font-size-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
     color: var(--color-header-butt-contact);
+}
 
+.project-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    line-height: var(--line-height-tight);
+}
 
+.project-description {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-default);
 }
 
 .project-tags {
     display: flex;
-    text-decoration: none;
+    flex-wrap: wrap; /* long lists go on several lines */
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0; /* remove the default list indentation */
     list-style: none;
-    justify-content: center;
-
 }
 
 .project-tag {
-    padding: var(--space-xs) var(--space-md);
-    /* top/bottom  left/right */
-    border: 2px solid var(--color-footer-bg);
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-footer-bg);
     border-radius: var(--radius-pill);
-    margin: 10px;
+    font-size: var(--font-size-xs);
 }
 
-.project-button{
-    margin-left: auto;
+.project-type,
+.project-group {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-default);
+}
+
+/* "View details →" link at the bottom right of each card */
+.project-link {
+    margin-top: auto; /* pushed to the bottom of the text area */
+    align-self: flex-end; /* and to the right */
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-section-strong);
+    text-decoration: none;
+}
+
+.project-link-arrow {
+    transition: transform var(--transition-duration) var(--transition-ease);
+}
+
+/* the arrow slides to the right on hover / keyboard focus */
+.project-link:hover .project-link-arrow,
+.project-link:focus-visible .project-link-arrow {
+    transform: translateX(var(--space-xs));
+}
+
+/* Round arrow button at the end of the row of cards */
+.projects-view-all {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: 0 var(--space-xl);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-header-butt-contact);
+    text-decoration: none;
+}
+
+.projects-view-all-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--view-all-size);
+    height: var(--view-all-size);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-header-butt-contact);
+    color: var(--color-footer-text);
+    font-size: var(--font-size-lg);
+    transition: transform var(--transition-duration) var(--transition-ease),
+        background-color var(--transition-duration) var(--transition-ease);
+}
+
+.projects-view-all:hover .projects-view-all-icon,
+.projects-view-all:focus-visible .projects-view-all-icon {
+    transform: scale(1.1);
+    background-color: var(--color-section-strong);
+}
+
+/* Date on the left, duration on the right */
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid var(--color-card-border);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-default);
 }
 
 
@@ -453,4 +541,525 @@ h1 {
 }
 .view-all{
     margin-left: auto;
+}
+
+.projects-preview-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;      /* exactly one screen high */
+  padding-top: var(--space-xl); /* room for the sticky header above the title */
+  overflow: hidden;   /* hides the cards outside the screen (and the horizontal scrollbar) */
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center; /* "safe": if it does not fit, keep the title visible */
+}
+
+/* "…" tag when a card has more than 3 technologies */
+.project-tag-more {
+    border-style: dashed;
+    cursor: help; /* the full list appears on hover (title attribute) */
+}
+
+
+/* ---------- Work page: intro ---------- */
+
+.page-intro-text {
+    max-width: 625px;
+    margin-left: var(--margin-left);
+    font-size: var(--font-size-md);
+    line-height: 1.65;
+    color: var(--color-text-default);
+}
+
+
+/* ---------- Work page: technology orbit ---------- */
+
+.orbit-section {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-md) var(--space-xxl);
+}
+
+/* Square area: the center of this square is the center of the orbit */
+.orbit {
+    position: relative;
+    width: var(--orbit-size);
+    aspect-ratio: 1;
+}
+
+/* Dashed circle drawn on the path of the tiles */
+.orbit-ring {
+    position: absolute;
+    inset: calc(var(--orbit-tile-width) / 2);
+    border: 1px dashed var(--color-card-border);
+    border-radius: 50%;
+}
+
+/* The "sun": round box with the drop-down list */
+.orbit-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%; /* exact center */
+    z-index: 1;
+    width: var(--orbit-center-size);
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    border-radius: 50%;
+    box-shadow: var(--card-shadow);
+}
+
+.orbit-label {
+    font-size: var(--font-size-xs);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    color: var(--color-text-default);
+}
+
+.orbit-select {
+    font: inherit;
+    font-size: var(--font-size-sm);
+    max-width: calc(var(--orbit-center-size) - var(--space-lg)); /* stays inside the circle */
+    font-weight: 500;
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-section-strong);
+    color: var(--color-footer-text);
+    cursor: pointer;
+}
+
+.orbit-select:focus-visible {
+    outline: 2px solid var(--color-section-strong);
+    outline-offset: 3px;
+}
+
+.orbit-count {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-default);
+}
+
+/* The list covers the whole square and turns slowly around its center */
+.orbit-projects {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    pointer-events: none; /* clicks go through to the drop-down list... */
+    animation: orbit-spin var(--orbit-duration) linear infinite;
+}
+
+/* Each project is placed on the circle:
+   1. centered in the square, 2. turned by its angle,
+   3. pushed to the edge of the circle, 4. turned back to stay upright */
+.orbit-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--orbit-tile-width);
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--orbit-radius)) rotate(calc(var(--angle) * -1));
+    transition: transform var(--orbit-move-duration) var(--transition-ease),
+        opacity var(--orbit-move-duration) var(--transition-ease),
+        visibility var(--orbit-move-duration);
+}
+
+.orbit-item.is-hidden {
+    opacity: 0;
+    visibility: hidden; /* also removed from keyboard navigation */
+}
+
+.orbit-tile {
+    pointer-events: auto; /* ...but the tiles stay clickable */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-bottom: var(--space-md);
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    color: var(--color-header-butt-contact);
+    text-decoration: none;
+    /* turns the other way at the same speed, so the text stays horizontal */
+    animation: orbit-spin-reverse var(--orbit-duration) linear infinite;
+    transition: scale var(--transition-duration) var(--transition-ease);
+}
+
+.orbit-tile:hover,
+.orbit-tile:focus-visible {
+    scale: 1.06;
+}
+
+.orbit-tile:focus-visible {
+    outline: 2px solid var(--color-section-strong);
+    outline-offset: 3px;
+}
+
+/* Pause the rotation while the visitor points at or tabs to a project */
+.orbit-projects:hover,
+.orbit-projects:focus-within,
+.orbit-projects:hover .orbit-tile,
+.orbit-projects:focus-within .orbit-tile {
+    animation-play-state: paused;
+}
+
+.orbit-tile-media {
+    height: var(--orbit-tile-media-height);
+    margin-bottom: var(--space-xs);
+    background-color: var(--color-bg);
+}
+
+.orbit-tile-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.orbit-tile-date,
+.orbit-tile-title,
+.orbit-tile-type {
+    padding: 0 var(--space-md);
+}
+
+.orbit-tile-date,
+.orbit-tile-type {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-default);
+}
+
+.orbit-tile-title {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    line-height: var(--line-height-tight);
+}
+
+@keyframes orbit-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-spin-reverse {
+    to { transform: rotate(-360deg); }
+}
+
+/* Accessibility: no rotation for users who disable animations */
+@media (prefers-reduced-motion: reduce) {
+    .orbit-projects,
+    .orbit-tile {
+        animation: none;
+    }
+}
+
+/* Small screens: the orbit does not fit, so it becomes a simple grid */
+@media (max-width: 768px) {
+    .orbit {
+        width: 100%;
+        aspect-ratio: auto;
+    }
+
+    .orbit-ring {
+        display: none;
+    }
+
+    .orbit-center {
+        position: static;
+        translate: none;
+        margin: 0 auto var(--space-lg);
+    }
+
+    .orbit-projects {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(var(--orbit-tile-width), 1fr));
+        gap: var(--space-md);
+        pointer-events: auto;
+        animation: none;
+    }
+
+    .orbit-item {
+        position: static;
+        width: auto;
+        transform: none;
+    }
+
+    .orbit-item.is-hidden {
+        display: none;
+    }
+
+    .orbit-tile {
+        animation: none;
+    }
+}
+
+/* "View details →" at the bottom of each orbit tile */
+.orbit-tile-more {
+    margin-top: var(--space-xs);
+    padding: 0 var(--space-md);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--color-section-strong);
+}
+
+.orbit-tile-arrow {
+    display: inline-block; /* an inline span cannot be moved with transform */
+    transition: transform var(--transition-duration) var(--transition-ease);
+}
+
+.orbit-tile:hover .orbit-tile-arrow,
+.orbit-tile:focus-visible .orbit-tile-arrow {
+    transform: translateX(var(--space-xs));
+}
+
+
+/* ---------- Project pop-up (<dialog>) ---------- */
+
+.project-dialog {
+    width: min(var(--dialog-width), 92vw);
+    max-height: 90vh;
+    padding: 0; /* the content fills the box: a click on the dialog itself = a click outside */
+    border: none;
+    border-radius: var(--card-radius);
+    background-color: var(--color-card-bg);
+    box-shadow: var(--glass-shadow);
+    overflow: hidden;
+    color: var(--color-header-butt-contact);
+}
+
+.project-dialog[open] {
+    animation: dialog-in var(--transition-duration) var(--transition-ease);
+}
+
+/* Dark blurred veil behind the pop-up */
+.project-dialog::backdrop {
+    background-color: var(--color-backdrop);
+    backdrop-filter: blur(4px);
+}
+
+/* The page behind does not scroll while the pop-up is open */
+body:has(.project-dialog[open]) {
+    overflow: hidden;
+}
+
+/* Only the content scrolls, so the close button always stays visible */
+.dialog-body {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.dialog-close {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--dialog-close-size);
+    height: var(--dialog-close-size);
+    border: none;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-glass);
+    box-shadow: var(--card-shadow);
+    font: inherit;
+    font-size: var(--font-size-lg);
+    color: var(--color-header-butt-contact);
+    cursor: pointer;
+    transition: background-color var(--transition-duration) var(--transition-ease),
+        color var(--transition-duration) var(--transition-ease);
+}
+
+.dialog-close:hover,
+.dialog-close:focus-visible {
+    background-color: var(--color-section-strong);
+    color: var(--color-footer-text);
+}
+
+.dialog-close:focus-visible {
+    outline: 2px solid var(--color-section-strong);
+    outline-offset: 3px;
+}
+
+.dialog-media {
+    height: var(--dialog-media-height);
+    background-color: var(--color-bg);
+}
+
+.dialog-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dialog-intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg) var(--space-xl) 0;
+}
+
+.dialog-eyebrow,
+.dialog-heading {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+    color: var(--color-section-strong);
+}
+
+.dialog-title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: 500;
+    line-height: var(--line-height-tight);
+}
+
+.dialog-dates {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-default);
+}
+
+.dialog-description {
+    margin: 0;
+    font-size: var(--font-size-md);
+    line-height: 1.65;
+    color: var(--color-text-default);
+}
+
+/* Story on the left (2/3), key facts on the right (1/3) */
+.dialog-columns {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-lg) var(--space-xl) var(--space-xl);
+}
+
+.dialog-main,
+.dialog-aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.dialog-aside {
+    align-self: start;
+    padding: var(--space-lg);
+    border-radius: var(--glass-radius);
+    background-color: var(--color-bg);
+}
+
+.dialog-heading {
+    margin-bottom: var(--space-sm);
+}
+
+.dialog-text,
+.dialog-list {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.65;
+    color: var(--color-text-default);
+}
+
+.dialog-list {
+    padding-left: var(--space-md);
+}
+
+@keyframes dialog-in {
+    from {
+        opacity: 0;
+        translate: 0 var(--space-md);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .project-dialog[open] {
+        animation: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .dialog-intro {
+        padding: var(--space-lg) var(--space-md) 0;
+    }
+
+    .dialog-columns {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+        padding: var(--space-lg) var(--space-md);
+    }
+}
+
+/* Bar of external link buttons, stuck to the bottom of the pop-up */
+.dialog-actions {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-xl);
+    border-top: 1px solid var(--color-card-border);
+    background-color: var(--color-card-bg);
+}
+
+.dialog-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    border: 1px solid var(--color-header-butt-contact);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-header-butt-contact);
+    text-decoration: none;
+    transition: background-color var(--transition-duration) var(--transition-ease),
+        color var(--transition-duration) var(--transition-ease),
+        translate var(--transition-duration) var(--transition-ease);
+}
+
+/* Main button: filled, the first thing the eye sees */
+.dialog-button-primary {
+    background-color: var(--color-header-butt-contact);
+    color: var(--color-footer-text);
+}
+
+.dialog-button:hover,
+.dialog-button:focus-visible {
+    translate: 0 calc(var(--space-xs) * -1); /* lifts slightly */
+    background-color: var(--color-section-strong);
+    border-color: var(--color-section-strong);
+    color: var(--color-footer-text);
+}
+
+.dialog-button:focus-visible {
+    outline: 2px solid var(--color-section-strong);
+    outline-offset: 3px;
+}
+
+.dialog-button-icon {
+    display: inline-block;
+    transition: transform var(--transition-duration) var(--transition-ease);
+}
+
+/* the arrow flies up-right on hover */
+.dialog-button:hover .dialog-button-icon,
+.dialog-button:focus-visible .dialog-button-icon {
+    transform: translate(2px, -2px);
+}
+
+@media (max-width: 768px) {
+    .dialog-actions {
+        padding: var(--space-md);
+    }
 }
