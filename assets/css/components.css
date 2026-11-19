@@ -312,7 +312,7 @@ h1 {
 }
 
 .strong-hero {
-    color: var(--color-footer-strong);
+    color: var(--color-section-strong); /* darker blue: readable on the light background */
 }
 
 .hero .intro {

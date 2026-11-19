@@ -32,3 +32,106 @@ main {
   white-space: nowrap;
   border: 0;
 }
+
+/* ---------- Animated background: two blurred silhouettes on the right ----------
+   Pure CSS, nothing to download.
+   - Each shape is an irregular "pebble": border-radius with 8 different
+     values gives a lopsided shape instead of a circle.
+   - A strong blur turns it into a soft silhouette: we feel a shape,
+     we do not really see its outline.
+   - The shapes drift AND turn slowly on themselves: since they are not
+     round, the rotation makes their silhouette seem to change.
+   - Only "transform" is animated: the browser blurs the shape once,
+     then just moves it, so it stays light and smooth.
+   - Both shapes stay on the RIGHT side: the text is on the left. */
+
+/* Fixed layer covering the screen, behind all the content */
+.background-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden; /* a shape going off-screen never creates a scrollbar */
+  pointer-events: none; /* never catches a click */
+}
+
+/* Very light grain on the whole background (set the opacity to 0 to remove it) */
+.background-blobs::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  opacity: var(--grain-page-opacity);
+}
+
+.blob {
+  position: absolute;
+  top: 0;
+  left: 0;
+  translate: -50% -50%; /* the animation then moves the CENTER of the shape */
+  filter: blur(var(--blob-blur));
+  will-change: transform; /* tells the browser to prepare the animation */
+}
+
+.blob-main {
+  width: var(--blob-size);
+  aspect-ratio: 1.2; /* a bit wider than tall */
+  border-radius: 62% 38% 46% 54% / 48% 62% 38% 52%; /* lopsided pebble */
+  background: linear-gradient(135deg, var(--color-blob-main-start), var(--color-blob-main-end));
+  animation: blob-drift-main var(--blob-duration) ease-in-out infinite;
+}
+
+.blob-second {
+  width: calc(var(--blob-size) * 0.75);
+  aspect-ratio: 0.85; /* a bit taller than wide */
+  border-radius: 40% 60% 65% 35% / 55% 40% 60% 45%; /* another pebble */
+  background: linear-gradient(200deg, var(--color-blob-second-start), var(--color-blob-second-end));
+  animation: blob-drift-second calc(var(--blob-duration) * 1.3) ease-in-out infinite;
+}
+
+/* Paths in screen units (vw, vh), kept between about 66vw and 90vw:
+   the right side of the screen, whatever its size */
+@keyframes blob-drift-main {
+  0%   { transform: translate(78vw, 30vh) rotate(0deg) scale(1); }
+  25%  { transform: translate(75vw, 48vh) rotate(60deg) scale(1.06); }
+  50%  { transform: translate(80vw, 64vh) rotate(140deg) scale(0.95); }
+  75%  { transform: translate(86vw, 42vh) rotate(250deg) scale(1.04); }
+  100% { transform: translate(78vw, 30vh) rotate(360deg) scale(1); }
+}
+
+@keyframes blob-drift-second {
+  0%   { transform: translate(88vw, 72vh) rotate(0deg) scale(1); }
+  33%  { transform: translate(70vw, 60vh) rotate(-100deg) scale(1.1); }
+  66%  { transform: translate(84vw, 20vh) rotate(-220deg) scale(0.9); }
+  100% { transform: translate(88vw, 72vh) rotate(-360deg) scale(1); }
+}
+
+/* Small screens: the text takes the full width, so the shapes get
+   smaller and lighter */
+@media (max-width: 768px) {
+  .blob-main {
+    width: var(--blob-size-mobile);
+  }
+
+  .blob-second {
+    width: calc(var(--blob-size-mobile) * 0.75);
+  }
+
+  .background-blobs {
+    opacity: 0.6;
+  }
+}
+
+/* Accessibility: the shapes stay in place for users who disable animations */
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
+
+  .blob-main {
+    transform: translate(78vw, 30vh);
+  }
+
+  .blob-second {
+    transform: translate(88vw, 72vh);
+  }
+}

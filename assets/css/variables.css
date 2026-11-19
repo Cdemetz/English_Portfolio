@@ -68,6 +68,20 @@
   --color-backdrop: rgba(10, 22, 48, 0.55); /* dark veil behind the pop-up */
   --font-size-xl: 2rem;
 
+  /* Animated background: two blurred silhouettes on the right */
+  --blob-size: clamp(260px, 32vw, 520px);       /* scales with the screen, within limits */
+  --blob-size-mobile: 240px;
+  --blob-blur: 90px;                            /* more blur = more of a silhouette */
+  --color-blob-main-start: rgba(138, 171, 249, 0.75);
+  --color-blob-main-end: rgba(199, 214, 255, 0.55);
+  --color-blob-second-start: rgba(47, 91, 211, 0.35);
+  --color-blob-second-end: rgba(138, 171, 249, 0.45);
+  --blob-duration: 30s;                         /* one full trip: slow and calm */
+
+  /* Grain: SVG noise written as a "data URI" = no file to download */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-page-opacity: 0.05;  /* very light texture on the whole page */
+
   /* Logo */
   --logo-size: 50px;
 
