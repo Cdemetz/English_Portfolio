@@ -1,3 +1,5 @@
 .DS_Store
 Thumbs.db
 .vscode/
+# Raw source material for the project cards (not part of the website)
+assets/Cards-content/
