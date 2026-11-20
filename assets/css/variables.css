@@ -63,10 +63,17 @@
 
   /* Project pop-up */
   --dialog-width: 960px;
-  --dialog-media-height: 260px;
+  --dialog-media-height: min(420px, 45vh); /* tall enough to read screenshots and diagrams */
   --dialog-close-size: 40px;
   --color-backdrop: rgba(10, 22, 48, 0.55); /* dark veil behind the pop-up */
   --font-size-xl: 2rem;
+
+  /* Image carousel in the pop-up */
+  --carousel-button-size: 44px;
+  --carousel-button-size-mobile: 32px;
+  --dialog-media-height-mobile: 260px;
+  --carousel-dot-size: 8px;
+  --carousel-duration: 0.5s;
 
   /* Animated background: two blurred silhouettes on the right */
   --blob-size: clamp(260px, 32vw, 520px);       /* scales with the screen, within limits */

@@ -888,16 +888,181 @@ body:has(.project-dialog[open]) {
     outline-offset: 3px;
 }
 
-.dialog-media {
+/* ---------- Image carousel (top of the pop-up) ---------- */
+
+/* Window on the track: only one image is visible at a time */
+.carousel-viewport {
+    position: relative;
     height: var(--dialog-media-height);
+    overflow: hidden;
     background-color: var(--color-bg);
 }
 
-.dialog-media img {
+/* All the images side by side; JS slides the track to the left */
+.carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform var(--carousel-duration) var(--transition-ease);
+}
+
+.carousel-slide {
+    flex: 0 0 100%; /* each image takes the full width of the window */
+    height: 100%;
+    /* more space at the bottom for the dots */
+    padding: var(--space-md) var(--space-xl) var(--space-lg);
+}
+
+.carousel-slide img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* the whole screenshot or diagram stays visible */
+}
+
+/* Round previous / next buttons on both sides of the image */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--carousel-button-size);
+    height: var(--carousel-button-size);
+    border: none;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-glass);
+    box-shadow: var(--card-shadow);
+    font: inherit;
+    font-size: var(--font-size-md);
+    color: var(--color-header-butt-contact);
+    cursor: pointer;
+    transition: background-color var(--transition-duration) var(--transition-ease),
+        color var(--transition-duration) var(--transition-ease);
+}
+
+.carousel-arrow-previous {
+    left: var(--space-md);
+}
+
+.carousel-arrow-next {
+    right: var(--space-md);
+}
+
+.carousel-arrow:hover,
+.carousel-arrow:focus-visible {
+    background-color: var(--color-section-strong);
+    color: var(--color-footer-text);
+}
+
+.carousel-arrow:focus-visible,
+.carousel-dot:focus-visible,
+.carousel-full-size:focus-visible {
+    outline: 2px solid var(--color-section-strong);
+    outline-offset: 3px;
+}
+
+/* One dot per image, centered at the bottom of the image */
+.carousel-dots {
+    position: absolute;
+    bottom: var(--space-sm);
+    left: 50%;
+    translate: -50% 0;
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-glass);
+}
+
+.carousel-dot {
+    width: var(--carousel-dot-size);
+    height: var(--carousel-dot-size);
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-footer-muted);
+    cursor: pointer;
+    transition: width var(--transition-duration) var(--transition-ease),
+        background-color var(--transition-duration) var(--transition-ease);
+}
+
+/* the current image: a longer, colored dot */
+.carousel-dot[aria-current="true"] {
+    width: calc(var(--carousel-dot-size) * 3);
+    background-color: var(--color-section-strong);
+}
+
+/* Caption, counter and full-size link under the image */
+.carousel-bar {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-xl);
+    border-bottom: 1px solid var(--color-card-border);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-default);
+}
+
+.carousel-caption {
+    flex: 1; /* takes the free space, pushes the counter and the link to the right */
+    margin: 0;
+}
+
+.carousel-counter {
+    font-variant-numeric: tabular-nums; /* digits of equal width: no jump between "1" and "2" */
+    white-space: nowrap;
+}
+
+.carousel-full-size {
+    font-weight: 500;
+    color: var(--color-section-strong);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.carousel-full-size:hover {
+    text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+        transition: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-viewport {
+        height: var(--dialog-media-height-mobile);
+    }
+
+    /* the image uses the full width: the arrows stay small, close to the edges */
+    .carousel-slide {
+        padding: var(--space-lg) var(--space-sm);
+    }
+
+    .carousel-arrow {
+        width: var(--carousel-button-size-mobile);
+        height: var(--carousel-button-size-mobile);
+        font-size: var(--font-size-sm);
+    }
+
+    .carousel-arrow-previous {
+        left: var(--space-xs);
+    }
+
+    .carousel-arrow-next {
+        right: var(--space-xs);
+    }
+
+    .carousel-bar {
+        flex-wrap: wrap;
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .carousel-caption {
+        flex-basis: 100%; /* caption on its own line, counter and link below */
+    }
 }
 
 .dialog-intro {
@@ -1059,7 +1224,14 @@ body:has(.project-dialog[open]) {
 }
 
 @media (max-width: 768px) {
+    /* smaller buttons, so several links do not hide the text behind them */
     .dialog-actions {
-        padding: var(--space-md);
+        gap: var(--space-sm);
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .dialog-button {
+        padding: var(--space-xs) var(--space-md);
+        font-size: var(--font-size-xs);
     }
 }

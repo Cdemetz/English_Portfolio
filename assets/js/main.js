@@ -30,6 +30,7 @@ const TECH = {
   visualParadigm: "Visual Paradigm",
   powerBi: "Power BI",
   msProject: "MS Project",
+  azureDevOps: "Azure DevOps",
   figma: "Figma",
   ssh: "SSH",
   gdpr: "GDPR",
@@ -47,28 +48,42 @@ const CATEGORIES = [
   { name: "Data & databases", technologies: [TECH.sql, TECH.postgres, TECH.powerBi, TECH.gdpr] },
   { name: "System design", technologies: [TECH.uml, TECH.merise, TECH.powerAmc, TECH.visualParadigm] },
   { name: "UI / UX design", technologies: [TECH.figma] },
-  { name: "Project management", technologies: [TECH.msProject] },
+  { name: "Project management", technologies: [TECH.msProject, TECH.azureDevOps] },
 ];
+
+
+// Folders of the project media (relative paths: the site lives in a sub-folder)
+const IMG = "assets/img/projects/";
+const DOC = "assets/pdf/projects/";
 
 
 // ---------------------------------------------------------------
 // PROJECTS (best project first)
+// images: the first one is the cover of the cards and tiles;
+// the pop-up shows all of them in a carousel.
+// links: buttons at the bottom of the pop-up (the first one is the main button).
 // ---------------------------------------------------------------
 const projects = [
   {
     id: 1,
-    media: "", // e.g. "assets/img/projects/sae-301.webp"
+    images: [
+      {
+        src: IMG + "sae301-client-website.webp",
+        alt: "Home page of the client's current online store",
+        caption: "The client's current website: the starting point of our redesign.",
+      },
+    ],
     date: "Oct 2026 – Feb 2027",
     time: "5 months",
     title: "E-Commerce Website for a Smartphone Retailer",
     description: "A five-month team project to design, develop and deploy a complete e-commerce website, from UML modeling to GDPR compliance.",
-    technologies: [TECH.uml, TECH.sql, TECH.postgres, TECH.powerAmc, TECH.laravel, TECH.html, TECH.css, TECH.js, TECH.csharp, TECH.wpf, TECH.powerBi, TECH.ssh, TECH.gdpr],
+    technologies: [TECH.uml, TECH.sql, TECH.postgres, TECH.powerAmc, TECH.laravel, TECH.html, TECH.css, TECH.js, TECH.csharp, TECH.wpf, TECH.powerBi, TECH.ssh, TECH.gdpr, TECH.azureDevOps],
     type: "University project – SAÉ 3.01",
     group: "Team of 5",
 
     // pop-up
     context: "SAÉ 3.01 is the largest project of the second year of my degree. In a team of five, we are rebuilding the e-commerce website of a smartphone retailer from scratch, showcasing a selection of its computers, smartphones and accessories, in conditions close to a real professional project. It brings together every subject of the course: development, databases, networks, law and communication.",
-    objectives: "Model the system with UML, build a GDPR-compliant database, develop the website and deploy it on a server, integrate a chatbot, secure passwords with cryptography, and write all the legal and user documentation.",
+    objectives: "Rebuild the online store for new and refurbished computers and smartphones and their accessories: a product configurator with compatibility rules between options, the cart and checkout, the customer account, device trade-in and financing. To get there: model the system with UML, build a GDPR-compliant PostgreSQL database, develop the website with Laravel and deploy it on a server, integrate a chatbot and external APIs, secure passwords following the recommendations of the French cybersecurity agency (ANSSI), and write all the legal and user documentation.",
     myRole: "Co-project manager, alongside a teammate. I assign roles and tasks, set deadlines and track the progress of new features.",
     tasks: [
       "Designed the UML diagrams and the conceptual data model (MCD)",
@@ -82,7 +97,7 @@ const projects = [
       "Chatbot integrated into the website",
       "More features to come: the project is still in progress",
     ],
-    organization: "Agile approach with one-week development sprints, led by two co-project managers.",
+    organization: "Scrum approach with one-week development sprints, planned and tracked in Azure DevOps and led by two co-project managers. Each sprint ends with a review with the client, sometimes held in English.",
     challenge: "Sharing roles and tasks fairly within a team of five and meeting every deadline. The design phase was also complex, as GDPR and legal requirements had to be considered before any development could start.",
     learned: "How to combine many technologies and tools in a complex, real-world project. I also learned that communication is essential to a team's success, and that listening to others helps me understand their difficulties and needs.",
     result: "In progress – delivery planned for February 2027.",
@@ -91,7 +106,18 @@ const projects = [
 
   {
     id: 2,
-    media: "",
+    images: [
+      {
+        src: IMG + "sae201-product-catalog.webp",
+        alt: "Product catalog screen of the sales application, with edit and delete buttons on each product",
+        caption: "Product catalog, manager view: every product can be edited or deleted.",
+      },
+      {
+        src: IMG + "sae201-class-diagram.webp",
+        alt: "UML class diagram of the sales application",
+        caption: "Class diagram: one class per business object, all sharing a generic ICrud<T> interface.",
+      },
+    ],
     date: "April – May 2026",
     time: "2 months",
     title: "Sales Tablet Application",
@@ -116,17 +142,38 @@ const projects = [
       "Product catalog with a shopping cart",
       "Data grids with filters by date and customer name",
       "Admin panel to add, edit or delete product categories, quote statuses and customers",
+      "Quotes and contracts generated as PDF files",
+      "Object-oriented architecture: a generic ICrud<T> interface (create, read, update, delete) shared by every business class",
     ],
     organization: "Collaborative team work with a fixed deadline and tasks shared equally.",
     challenge: "Connecting the PostgreSQL database to the WPF project and displaying the data correctly in the interface.",
     learned: "How to connect a database to an application, and why designing a mockup first makes development much easier.",
     result: "Completed.",
-    links: [],
+    links: [
+      { label: "Figma prototype", url: "https://www.figma.com/design/dQeNbHXME8EoEmnjIhlRFs/Sans-titre?node-id=3-36" },
+      { label: "Class diagram (PDF)", url: DOC + "sae201-class-diagram.pdf" },
+    ],
   },
 
   {
     id: 3,
-    media: "",
+    images: [
+      {
+        src: IMG + "sae204-dashboard-performance.webp",
+        alt: "Power BI dashboard page with the number of orders, new customers per month and orders by status",
+        caption: "Company performance: orders, new customers and order status, filtered by year.",
+      },
+      {
+        src: IMG + "sae204-dashboard-analytics.webp",
+        alt: "Power BI dashboard page with the revenue per year and the order lines per category",
+        caption: "Analytics: revenue per year, average prices and order lines per product category.",
+      },
+      {
+        src: IMG + "sae204-dashboard-geography.webp",
+        alt: "Power BI dashboard page with the revenue and the number of customers per town",
+        caption: "Geography: revenue and registered customers per town and postcode.",
+      },
+    ],
     date: "April – May 2026",
     time: "2 months",
     title: "Database Design & Power BI Dashboard",
@@ -148,7 +195,7 @@ const projects = [
     keyFeatures: [
       "Relational database for customers and orders",
       "Data integrity rules (constraints and checks)",
-      "Dashboard on sales performance, customers and order locations",
+      "Three-page dashboard: company performance, analytics and geography, with a filter by year",
       "Oral presentation of the dashboard, entirely in English",
     ],
     organization: "Collaborative team work with a fixed deadline, without a specific method.",
@@ -160,7 +207,18 @@ const projects = [
 
   {
     id: 4,
-    media: "",
+    images: [
+      {
+        src: IMG + "portfolio-home.webp",
+        alt: "Home page of this portfolio website",
+        caption: "The home page of this website, coded by hand without any framework.",
+      },
+      {
+        src: IMG + "portfolio-work.webp",
+        alt: "Work page of this portfolio, with the projects orbiting around the technology filter",
+        caption: "The Work page: the projects orbit around the chosen technology.",
+      },
+    ],
     date: "November 2026",
     time: "1 month",
     title: "Personal Portfolio Website",
@@ -181,7 +239,8 @@ const projects = [
     ],
     keyFeatures: [
       "Project cards generated automatically with JavaScript",
-      "Pop-up window with the details of each project",
+      "Technology filter: the matching projects orbit around the chosen category",
+      "Pop-up window with the details of each project and an image carousel",
       "Contact form",
     ],
     organization: "Weekly Scrum sprints tracked on a Miro board, with the code versioned on GitHub.",
@@ -196,7 +255,33 @@ const projects = [
 
   {
     id: 5,
-    media: "",
+    images: [
+      {
+        src: IMG + "sae205-mockup-catalog.webp",
+        alt: "Figma mockup of the tablet application: product search with filters by range and color",
+        caption: "Figma mockup: product search for franchisees, with filters by range and color.",
+      },
+      {
+        src: IMG + "sae205-mockup-new-customer.webp",
+        alt: "Figma mockup of the tablet application: form to create a new customer",
+        caption: "Figma mockup: creating a customer record before a new order.",
+      },
+      {
+        src: IMG + "sae205-activity-diagram.webp",
+        alt: "UML activity diagram of the order process, from the franchisee to the factories",
+        caption: "UML activity diagram: an order's journey from the store to the factories and back.",
+      },
+      {
+        src: IMG + "sae205-use-case-diagram.webp",
+        alt: "UML use case diagram of the factory management part",
+        caption: "UML use case diagram of the factory management part.",
+      },
+      {
+        src: IMG + "sae205-deployment-diagram.webp",
+        alt: "UML deployment diagram of the company's current IT infrastructure",
+        caption: "UML deployment diagram of the current IT infrastructure, analyzed to find its limits.",
+      },
+    ],
     date: "April – May 2026",
     time: "2 months",
     title: "Project Management & Requirements Analysis",
@@ -206,7 +291,7 @@ const projects = [
     group: "Team of 3",
 
     // pop-up
-    context: "Our team studied how a furniture company currently works: its structure, its activity, and the roles of the project owner (MOA) and the project contractor (MOE). The aim was to prepare a new version of its information system.",
+    context: "Our team studied how a furniture company with about 300 franchised stores and several factories currently works: its structure, its activity, and the roles of the project owner (MOA) and the project contractor (MOE). The aim was to prepare a new version of its information system.",
     objectives: "Understand the existing system, identify the expected improvements, and propose the changes required for a new version of the company's information system.",
     myRole: "Team leader. I assigned roles and goals, adapted each person's tasks to their strengths, and made sure we met every deadline.",
     tasks: [
@@ -216,6 +301,9 @@ const projects = [
     ],
     keyFeatures: [
       "Requirements specification",
+      "Analysis of the current IT system and its limits",
+      "Use case descriptions with sequence diagrams",
+      "Non-functional requirements and proposed solution (Laravel and PostgreSQL)",
       "Project management file",
       "Project schedule in MS Project",
       "UML diagrams and Figma mockup",
@@ -226,6 +314,7 @@ const projects = [
     result: "Completed.",
     links: [
       { label: "Figma mockup", url: "https://www.figma.com/design/Smz3RSJhZGaudyz9FvI1Be/Sans-titre?node-id=0-1&t=BrLQy0Te1uNKiJDW-1" },
+      { label: "Requirements specification (PDF, in French)", url: DOC + "sae205-requirements-specification.pdf" },
     ],
   },
 ];
@@ -254,12 +343,13 @@ if (grid) {
   projects.forEach((project) => {
     const card = addElement(grid, "article", "project-card");
 
-    // Image (only if the project has one)
+    // Cover image: the first image of the project (if it has one)
     const mediaBox = addElement(card, "div", "project-media");
-    if (project.media) {
+    if (project.images.length > 0) {
       const image = addElement(mediaBox, "img");
-      image.src = project.media;
-      image.alt = "Screenshot of " + project.title;
+      image.src = project.images[0].src;
+      image.alt = project.images[0].alt;
+      image.loading = "lazy"; // downloaded only when the card gets close to the screen
     }
 
         // Date and duration
@@ -385,9 +475,9 @@ if (orbitList && techFilter) {
     tile.href = "#project-" + project.id; // opens the pop-up (see below)
 
     const media = addElement(tile, "div", "orbit-tile-media");
-    if (project.media) {
+    if (project.images.length > 0) {
       const image = addElement(media, "img");
-      image.src = project.media;
+      image.src = project.images[0].src;
       image.alt = ""; // the title just below already describes the link
     }
     addElement(tile, "span", "orbit-tile-date", project.date);
@@ -453,17 +543,96 @@ const addListBlock = (parent, heading, items) => {
   items.forEach((text) => addElement(list, "li", "", text));
 };
 
+// Image carousel at the top of the pop-up.
+// All the images sit side by side in a "track"; showing image n means
+// sliding the track n widths to the left. With one image, no buttons.
+const addCarousel = (parent, project) => {
+  const images = project.images;
+  if (images.length === 0) return;
+
+  const carousel = addElement(parent, "section", "carousel");
+  carousel.setAttribute("aria-label", "Images of " + project.title);
+
+  const viewport = addElement(carousel, "div", "carousel-viewport");
+  const track = addElement(viewport, "div", "carousel-track");
+  const slides = images.map((item) => {
+    const slide = addElement(track, "div", "carousel-slide");
+    const image = addElement(slide, "img");
+    image.src = item.src;
+    image.alt = item.alt;
+    return slide;
+  });
+
+  // Bar under the image: caption, "2 / 4", link to the full-size image
+  const bar = addElement(carousel, "div", "carousel-bar");
+  const caption = addElement(bar, "p", "carousel-caption");
+  caption.setAttribute("aria-live", "polite"); // read aloud when the image changes
+  const counter = addElement(bar, "span", "carousel-counter");
+  const fullSize = addElement(bar, "a", "carousel-full-size", "Full size ");
+  fullSize.target = "_blank";
+  fullSize.rel = "noopener";
+  addElement(fullSize, "span", "", "↗").setAttribute("aria-hidden", "true");
+  addElement(fullSize, "span", "visually-hidden", "(opens the image in a new tab)");
+
+  let current = 0;
+  const dots = [];
+
+  const showImage = (index) => {
+    // loop: after the last image comes the first one, and the other way
+    current = (index + images.length) % images.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+
+    // hidden images are skipped by screen readers
+    slides.forEach((slide, i) => slide.setAttribute("aria-hidden", i !== current));
+    dots.forEach((dot, i) => dot.setAttribute("aria-current", i === current));
+
+    caption.textContent = images[current].caption;
+    counter.textContent = images.length > 1 ? current + 1 + " / " + images.length : "";
+    fullSize.href = images[current].src;
+  };
+
+  if (images.length > 1) {
+    // Previous / next arrows on both sides of the image
+    const previous = addElement(viewport, "button", "carousel-arrow");
+    previous.classList.add("carousel-arrow-previous");
+    previous.type = "button";
+    previous.setAttribute("aria-label", "Previous image");
+    addElement(previous, "span", "", "←").setAttribute("aria-hidden", "true");
+    previous.addEventListener("click", () => showImage(current - 1));
+
+    const next = addElement(viewport, "button", "carousel-arrow");
+    next.classList.add("carousel-arrow-next");
+    next.type = "button";
+    next.setAttribute("aria-label", "Next image");
+    addElement(next, "span", "", "→").setAttribute("aria-hidden", "true");
+    next.addEventListener("click", () => showImage(current + 1));
+
+    // One dot per image, to jump straight to it
+    const dotList = addElement(viewport, "div", "carousel-dots");
+    images.forEach((item, index) => {
+      const dot = addElement(dotList, "button", "carousel-dot");
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Show image " + (index + 1) + " of " + images.length);
+      dot.addEventListener("click", () => showImage(index));
+      dots.push(dot);
+    });
+
+    // Left and right arrow keys work while the focus is in the carousel
+    carousel.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") showImage(current - 1);
+      if (event.key === "ArrowRight") showImage(current + 1);
+    });
+  }
+
+  showImage(0);
+};
+
 // Fill the pop-up with one project, then open it
 const openProject = (project) => {
   dialogBody.innerHTML = ""; // remove the previous project
 
-  // Screenshot
-  const media = addElement(dialogBody, "div", "dialog-media");
-  if (project.media) {
-    const image = addElement(media, "img");
-    image.src = project.media;
-    image.alt = "Screenshot of " + project.title;
-  }
+  // Screenshots, mockups and diagrams
+  addCarousel(dialogBody, project);
 
   // Summary: type of work, title, dates, description, all technologies
   const intro = addElement(dialogBody, "div", "dialog-intro");
