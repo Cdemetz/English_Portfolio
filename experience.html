@@ -7,7 +7,7 @@
   <title>Experience – Clement Demetz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
@@ -23,7 +23,7 @@
   <header>
     <nav class="site-nav">
       <a class="logo" href="index.html" aria-label="Clement Demetz – Home"></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="experience.html" aria-current="page">Experience</a></li>
@@ -31,12 +31,145 @@
         <li><a href="interests.html">Interests</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <a class="nav-contact" href="contact.html">Let's talk</a>
+      <a class="nav-contact" href="contact.html">Let's talk <span aria-hidden="true">→</span></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open the menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
     </nav>
   </header>
 
   <main>
-    <!-- Page content goes here -->
+    <section class="page-intro">
+      <p class="eyebrow"><span aria-hidden="true"></span>Experience</p>
+      <h1>Learning through <span>doing.</span></h1>
+      <p class="lead">From building sites to software teams, every experience has taught me how to collaborate, adapt
+        and take responsibility.</p>
+      <span class="page-number" aria-hidden="true">/ 03</span>
+    </section>
+
+    <section class="section">
+      <div class="reveal">
+        <p class="eyebrow"><span aria-hidden="true"></span>Work experience &amp; university projects</p>
+        <h2 class="section-title">From the most <span>recent.</span></h2>
+      </div>
+
+      <ol class="timeline">
+        <li class="timeline-item reveal">
+          <p class="timeline-date">Oct 2026 – Feb 2027 <span>5 months</span></p>
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <article class="timeline-content">
+            <p class="timeline-type">University team project · SAÉ 3.01</p>
+            <h3>E-commerce website for a phone retailer</h3>
+            <p class="timeline-company">IUT Annecy · Université Savoie Mont Blanc</p>
+            <p class="timeline-place">Annecy-le-Vieux, France</p>
+            <ul class="timeline-missions">
+              <li>Design and development of the website (UI/UX)</li>
+              <li>GDPR compliance of the website and its data</li>
+              <li>Agile method with sprints, in a team of 5</li>
+            </ul>
+            <ul class="tag-list" aria-label="Skills gained">
+              <li>Agile &amp; sprints</li>
+              <li>UI / UX design</li>
+              <li>GDPR</li>
+              <li>Teamwork</li>
+            </ul>
+            <a class="text-link" href="work.html#project-1">See the project <span aria-hidden="true">→</span></a>
+          </article>
+        </li>
+
+        <li class="timeline-item reveal">
+          <p class="timeline-date">Jun – Aug 2026 <span>2 months</span></p>
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <article class="timeline-content">
+            <p class="timeline-type">Summer job</p>
+            <h3>Carpenter</h3>
+            <p class="timeline-company">LP Charpente · Carpentry company, 150 employees</p>
+            <p class="timeline-place">Allonzier-la-Caille, France</p>
+            <ul class="timeline-missions">
+              <li>Reading plans and building structures to the millimetre</li>
+              <li>Working at height in strict compliance with safety rules</li>
+              <li>Working daily in a team of 3 on construction and renovation sites (mainly public buildings)</li>
+            </ul>
+            <ul class="tag-list" aria-label="Skills gained">
+              <li>Precision</li>
+              <li>Safety rules</li>
+              <li>Teamwork</li>
+            </ul>
+          </article>
+        </li>
+
+        <li class="timeline-item reveal">
+          <p class="timeline-date">April 2026 <span>SAÉ 2.01</span></p>
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <article class="timeline-content">
+            <p class="timeline-type">University team project · SAÉ 2.01</p>
+            <h3>WPF desktop application for a furniture company</h3>
+            <p class="timeline-company">IUT Annecy · Université Savoie Mont Blanc</p>
+            <p class="timeline-place">Annecy-le-Vieux, France</p>
+            <ul class="timeline-missions">
+              <li>Developing a WPF desktop application in C# / .NET, in a team of 3</li>
+            </ul>
+            <ul class="tag-list" aria-label="Skills gained">
+              <li>C# / .NET</li>
+              <li>WPF</li>
+              <li>Teamwork</li>
+            </ul>
+            <a class="text-link" href="work.html#project-2">See the project <span aria-hidden="true">→</span></a>
+          </article>
+        </li>
+
+        <li class="timeline-item reveal">
+          <p class="timeline-date">Oct 2025 <span>2 weeks</span></p>
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <article class="timeline-content">
+            <p class="timeline-type">Work placement</p>
+            <h3>Factory operator</h3>
+            <p class="timeline-company">Precimecasavoy · Precision engineering company, 20 employees</p>
+            <p class="timeline-place">Sillingy, France</p>
+            <ul class="timeline-missions">
+              <li>Operating machines within precise tolerances</li>
+              <li>Checking the quality of the parts produced</li>
+            </ul>
+            <ul class="tag-list" aria-label="Skills gained">
+              <li>Precision</li>
+              <li>Quality control</li>
+            </ul>
+          </article>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <div class="reveal">
+        <p class="eyebrow"><span aria-hidden="true"></span>Education</p>
+        <h2 class="section-title">Foundations for <span>what’s next.</span></h2>
+      </div>
+
+      <ul class="education-cards">
+        <li class="panel education-card reveal">
+          <p class="education-date">2025 – present</p>
+          <div>
+            <h3>BUT Informatique</h3>
+            <p class="education-equivalent">Bachelor’s Degree of Technology in Computer Science</p>
+            <p>3-year undergraduate diploma – second year in progress.</p>
+            <p class="education-school">Université Savoie Mont Blanc – IUT Annecy, Annecy-le-Vieux, France</p>
+          </div>
+          <span class="badge">In progress</span>
+        </li>
+        <li class="panel education-card reveal">
+          <p class="education-date">2025</p>
+          <div>
+            <h3>Baccalauréat STI2D</h3>
+            <p class="education-equivalent">French Baccalaureate, with high honours</p>
+            <p>The French Baccalaureate is the national exam taken at the end of high school, required to enter higher
+              education; it has no exact equivalent in other countries. STI2D is its technological track, specialized
+              in industrial science, technology and sustainable development.</p>
+            <p class="education-school">Louis Lachenal High School – Argonay, France</p>
+          </div>
+          <span class="badge">High honours</span>
+        </li>
+      </ul>
+    </section>
   </main>
 
   <footer>

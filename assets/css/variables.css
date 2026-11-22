@@ -11,6 +11,19 @@
   --color-header-butt-contact:rgba(10, 22, 48, 1);
   --color-section-strong:#2f5bd3;
 
+  /* Colors from the Figma mock-up (pages About, Experience, Interests, Contact) */
+  --color-ink: #0a1630;            /* titles */
+  --color-sky: #6a93f0;            /* hover of the accent buttons, gradients */
+  --color-mist: #dce7fb;           /* light blue badges */
+  --color-line: #dde5f2;           /* thin borders and separators */
+  --color-muted: #667085;          /* small labels, dates (contrast AA on the light background) */
+  --color-white: #ffffff;
+  --color-surface: rgba(255, 255, 255, 0.72); /* cards: lets the blurred background show a little */
+  --color-hero-overlay: linear-gradient(90deg, rgba(5, 12, 28, 0.78), rgba(5, 12, 28, 0.2) 75%);
+  --color-photo-placeholder: linear-gradient(135deg, #14285a 0%, #2f5bd3 55%, #8aabf9 100%);
+  --color-error: #a3261b;          /* form error message (contrast AA on its background) */
+  --color-error-bg: #fde8e6;
+
   /* Footer colors */
   --color-footer-text: #ffffff;
   --color-footer-link: #d3dcf0;
@@ -28,6 +41,14 @@
   --font-size-lg: 1.3rem;
   --font-size-display: 3.25rem;
   --font-size-display-mobile: 2rem;
+  --font-size-h1: clamp(3rem, 7vw, 5.75rem);    /* big page titles: scale with the screen */
+  --font-size-h2: clamp(2.25rem, 4.6vw, 4rem);  /* section titles */
+  --font-size-h3: 1.375rem;
+  --font-size-intro: 1.125rem;                  /* lead paragraph under a page title */
+  --line-height-title: 0.95;
+  --line-height-text: 1.65;
+  --letter-spacing-title: -0.055em;             /* tight titles, like the mock-up */
+  --font-weight-bold: 700;
   --line-height-tight: 1.1;
   --letter-spacing-wide: 0.12em;
 
@@ -41,6 +62,16 @@
 
   /* Shapes */
   --radius-pill: 999px;
+  --radius-panel: 20px;                         /* cards of the About / Experience / Contact pages */
+
+  /* Layout */
+  --content-max: 1240px;                        /* max width of the page content */
+  --page-gutter: max(var(--space-lg), calc((100% - var(--content-max)) / 2)); /* side space that centers the content */
+  --header-height: 64px;
+  --header-top: 18px;
+  --skill-bar-height: 4px;
+  --timeline-dot-size: 13px;
+  --icon-button-size: 42px;
 
   /* Project cards */
   /* 3 full cards + half of the 4th on any screen: (screen - side spaces) / 3.5, between 320px and 500px */

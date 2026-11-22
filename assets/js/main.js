@@ -1,3 +1,7 @@
+// Tells the CSS that JavaScript works (used by the "reveal" animations:
+// without JavaScript, nothing is hidden)
+document.documentElement.classList.add("js");
+
 // Show the glass header once the page is scrolled
 const header = document.querySelector("header");
 
@@ -7,6 +11,86 @@ const updateHeader = () => {
 
 window.addEventListener("scroll", updateHeader);
 updateHeader(); // also check on page load (e.g. after a refresh mid-page)
+
+
+// ---------------------------------------------------------------
+// MOBILE MENU (small screens): the button opens and closes the links
+// ---------------------------------------------------------------
+const menuButton = document.querySelector(".menu-button");
+
+const setMenu = (open) => {
+  header.classList.toggle("nav-open", open);
+  menuButton.setAttribute("aria-expanded", open); // tells screen readers if it is open
+  menuButton.setAttribute("aria-label", open ? "Close the menu" : "Open the menu");
+};
+
+if (menuButton) {
+  menuButton.addEventListener("click", () => {
+    setMenu(!header.classList.contains("nav-open"));
+  });
+
+  // The Escape key closes the menu and gives the focus back to the button
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && header.classList.contains("nav-open")) {
+      setMenu(false);
+      menuButton.focus();
+    }
+  });
+}
+
+
+// ---------------------------------------------------------------
+// REVEAL ON SCROLL: elements with the class "reveal" fade in when
+// they enter the screen. IntersectionObserver warns us when an
+// element becomes visible, without checking on every scroll.
+// ---------------------------------------------------------------
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target); // only once
+      }
+    });
+  }, { threshold: 0.12 }); // 12% of the element visible
+
+  revealItems.forEach((item) => revealObserver.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add("is-visible")); // old browsers
+}
+
+
+// ---------------------------------------------------------------
+// CONTACT FORM
+// send-message.php comes back to contact.html?status=... : we show
+// the matching message. We also note when the form was displayed
+// (robots send it in less than a few seconds).
+// ---------------------------------------------------------------
+const contactForm = document.querySelector(".contact-form");
+const formStatus = document.querySelector(".form-status");
+
+const FORM_MESSAGES = {
+  sent: { text: "Thank you! Your message has been sent. I will get back to you soon.", type: "is-success" },
+  invalid: { text: "Some fields are missing or incorrect. Please check them and try again.", type: "is-error" },
+  wait: { text: "Please wait a minute before sending another message.", type: "is-error" },
+  error: { text: "Sorry, the message could not be sent. Please email me directly.", type: "is-error" },
+};
+
+if (contactForm && formStatus) {
+  contactForm.elements.started.value = Math.floor(Date.now() / 1000); // seconds
+
+  const status = new URLSearchParams(window.location.search).get("status");
+  const message = FORM_MESSAGES[status]; // undefined if the status is unknown
+
+  if (message) {
+    formStatus.textContent = message.text; // textContent: never interpreted as HTML
+    formStatus.classList.add(message.type);
+    formStatus.hidden = false;
+    if (status === "sent") contactForm.reset();
+  }
+}
 
 // ---------------------------------------------------------------
 // TECHNOLOGIES

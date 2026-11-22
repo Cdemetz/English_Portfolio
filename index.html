@@ -8,7 +8,7 @@
   <title>Clement Demetz – Computer Science Student & Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
@@ -25,7 +25,7 @@
   <header>
     <nav class="site-nav">
       <a class="logo" href="index.html" aria-label="Clement Demetz – Home"></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="experience.html">Experience</a></li>
@@ -33,50 +33,100 @@
         <li><a href="interests.html">Interests</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <a class="nav-contact" href="contact.html">Let's talk</a>
+      <a class="nav-contact" href="contact.html">Let's talk <span aria-hidden="true">→</span></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open the menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="top">
-        <span></span>
-        <p>Computer science student</p>
-
-      </div>
+      <p class="eyebrow"><span aria-hidden="true"></span>Computer science student</p>
       <h1>Building thoughtful <span class="strong-hero">digital products.</span></h1>
       <p class="intro">I’m Clement, a developer and aspiring Product Owner turning complex problems into clear, useful
-        experiences.
-      </p>
-      <a class="button-primary" href="work.html">See my work</a>
-      <a class="button-secondary" href="assets/pdf/cv/clement-demetz-cv.pdf" target="_blank" rel="noopener">Download CV
-        (PDF)</a>
-      <div class="scroll-hint">
+        experiences.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="work.html">See my work <span aria-hidden="true">→</span></a>
+        <a class="button button-secondary" href="assets/pdf/cv/clement-demetz-cv.pdf" target="_blank"
+          rel="noopener">View my CV (PDF) <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
         <p class="scroll-hint-text">Scroll to explore</p>
-        <span class="scroll-hint-line " aria-hidden="true"></span>
+        <span class="scroll-hint-line"></span>
       </div>
     </section>
 
     <section class="projects-preview">
       <div class="projects-preview-sticky">
         <div class="projects-preview-content">
-          <span class="line" aria-hidden="true"></span>
-          <span>Selected work</span>
-          <p>Projects with <span class="strong-character">purpose.</span></p>
-          <a class="view-all" href="work.html">View all projects</a>
+          <div>
+            <p class="eyebrow"><span aria-hidden="true"></span>Selected work</p>
+            <h2 class="section-title">Projects with <span>purpose.</span></h2>
+          </div>
+          <a class="text-link" href="work.html">View all projects <span aria-hidden="true">→</span></a>
         </div>
         <div class="projects-preview-grid"></div>
       </div>
     </section>
 
-    <section class="skills-preview">
+    <!-- Every technology and tool I use (from my CV and my projects) -->
+    <section class="section skills-preview reveal">
+      <p class="eyebrow"><span aria-hidden="true"></span>What I work with</p>
+      <h2 class="section-title">Tools for turning ideas into <span>reality.</span></h2>
 
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3 class="skill-group-title">Development</h3>
+          <ul class="skill-cloud">
+            <li class="is-featured">C# / .NET</li>
+            <li class="is-featured">JavaScript</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>PHP</li>
+            <li>Laravel</li>
+            <li>WPF</li>
+            <li>Python</li>
+            <li>C++</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group-title">Data</h3>
+          <ul class="skill-cloud">
+            <li class="is-featured">PostgreSQL</li>
+            <li>SQL</li>
+            <li>Power BI</li>
+            <li>GDPR</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group-title">Design &amp; modeling</h3>
+          <ul class="skill-cloud">
+            <li class="is-featured">UML</li>
+            <li>Merise</li>
+            <li>Figma</li>
+            <li>PowerAMC</li>
+            <li>Visual Paradigm</li>
+            <li>Canva</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-group-title">Tools &amp; environments</h3>
+          <ul class="skill-cloud">
+            <li>MS Project</li>
+            <li>Miro</li>
+            <li>Visual Studio Code</li>
+            <li>WordPress</li>
+            <li>VirtualBox</li>
+            <li>SSH</li>
+            <li>Windows</li>
+            <li>Linux</li>
+          </ul>
+        </div>
+      </div>
+
+      <a class="text-link" href="about.html">More about my skills <span aria-hidden="true">→</span></a>
     </section>
-
-    <!-- <div>
-      <img src="assets/img/logo-clement-demetz.png" alt="Clement Demetz logo">
-      <img src="assets/img/cv-preview.png" alt="Preview of Clement Demetz's resume">
-    </div> -->
 
   </main>
 

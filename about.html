@@ -7,7 +7,7 @@
   <title>About – Clement Demetz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
@@ -23,7 +23,7 @@
   <header>
     <nav class="site-nav">
       <a class="logo" href="index.html" aria-label="Clement Demetz – Home"></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html" aria-current="page">About</a></li>
         <li><a href="experience.html">Experience</a></li>
@@ -31,12 +31,161 @@
         <li><a href="interests.html">Interests</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <a class="nav-contact" href="contact.html">Let's talk</a>
+      <a class="nav-contact" href="contact.html">Let's talk <span aria-hidden="true">→</span></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open the menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
     </nav>
   </header>
 
   <main>
-    <!-- Page content goes here -->
+    <section class="page-intro">
+      <p class="eyebrow"><span aria-hidden="true"></span>About</p>
+      <h1>Curious by nature. <span>Product-minded.</span></h1>
+      <p class="lead">I combine technical foundations with a taste for organization, teamwork and building things people
+        actually use.</p>
+      <span class="page-number" aria-hidden="true">/ 02</span>
+    </section>
+
+    <section class="section about-story">
+      <figure class="profile reveal">
+        <!-- TODO: replace this placeholder with the real photo:
+             <img class="profile-photo" src="assets/img/about/profile.webp" alt="Portrait of Clement Demetz"> -->
+        <div class="profile-photo photo-placeholder" role="img" aria-label="Portrait of Clement Demetz (photo coming soon)">
+          <span aria-hidden="true">CD</span>
+        </div>
+        <figcaption>French · based in Annecy, France</figcaption>
+      </figure>
+
+      <div class="story-copy reveal">
+        <p class="eyebrow"><span aria-hidden="true"></span>A little about me</p>
+        <h2 class="section-title">I enjoy the space between <span>technology</span> and people.</h2>
+        <p>I am in the second year of a BUT Informatique (Bachelor’s Degree of Technology in Computer Science) at IUT
+          Annecy, France. I specialize in software development and project management, with a strong interest in the
+          Product Owner role.</p>
+        <p>I am looking for an internship in an international environment, to broaden my vision and to work with
+          different methods and cultures. Driven by teamwork and technology, I can organize and manage several projects
+          at once. One day, I would like to create my own company.</p>
+
+        <dl class="mini-facts">
+          <div>
+            <dt>Studies</dt>
+            <dd>2nd year of BUT</dd>
+          </div>
+          <div>
+            <dt>Languages</dt>
+            <dd>FR · EN · ES</dd>
+          </div>
+          <div>
+            <dt>Driving licences</dt>
+            <dd>Car &amp; boat</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <div>
+          <p class="eyebrow"><span aria-hidden="true"></span>Technical skills</p>
+          <h2 class="section-title">Skills I’m building <span>every day.</span></h2>
+        </div>
+      </div>
+
+      <!-- Levels taken from the bars of my CV: level-4 = confident, level-3 = intermediate -->
+      <ul class="skill-bars">
+        <li class="skill-bar level-4 reveal">
+          <span class="skill-bar-name">HTML / CSS</span>
+          <span class="skill-bar-level">Confident</span>
+          <span class="skill-bar-track" aria-hidden="true"><span class="skill-bar-fill"></span></span>
+        </li>
+        <li class="skill-bar level-3 reveal">
+          <span class="skill-bar-name">JavaScript / PHP</span>
+          <span class="skill-bar-level">Intermediate</span>
+          <span class="skill-bar-track" aria-hidden="true"><span class="skill-bar-fill"></span></span>
+        </li>
+        <li class="skill-bar level-4 reveal">
+          <span class="skill-bar-name">C# / .NET (WPF)</span>
+          <span class="skill-bar-level">Confident</span>
+          <span class="skill-bar-track" aria-hidden="true"><span class="skill-bar-fill"></span></span>
+        </li>
+        <li class="skill-bar level-3 reveal">
+          <span class="skill-bar-name">Python / C++</span>
+          <span class="skill-bar-level">Intermediate</span>
+          <span class="skill-bar-track" aria-hidden="true"><span class="skill-bar-fill"></span></span>
+        </li>
+        <li class="skill-bar level-4 reveal">
+          <span class="skill-bar-name">SQL (PostgreSQL)</span>
+          <span class="skill-bar-level">Confident</span>
+          <span class="skill-bar-track" aria-hidden="true"><span class="skill-bar-fill"></span></span>
+        </li>
+        <li class="skill-bar level-4 reveal">
+          <span class="skill-bar-name">UML / Merise</span>
+          <span class="skill-bar-level">Confident</span>
+          <span class="skill-bar-track" aria-hidden="true"><span class="skill-bar-fill"></span></span>
+        </li>
+      </ul>
+
+      <div class="tools reveal">
+        <h3 class="tools-title">Tools &amp; environments</h3>
+        <ul class="skill-cloud">
+          <li>Visual Paradigm</li>
+          <li>Figma</li>
+          <li>Canva</li>
+          <li>Miro</li>
+          <li>MS Project (Gantt charts)</li>
+          <li>VirtualBox</li>
+          <li>WordPress</li>
+          <li>Visual Studio Code</li>
+          <li>Windows</li>
+          <li>Linux</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section soft-grid">
+      <div class="reveal">
+        <p class="eyebrow"><span aria-hidden="true"></span>Soft skills</p>
+        <h2 class="section-title">How I show up <span>in a team.</span></h2>
+      </div>
+
+      <ol class="numbered-list">
+        <li class="numbered-item reveal">
+          <h3>Open to other cultures</h3>
+          <p>I interact well with people from diverse cultures and enjoy learning from different points of view.</p>
+        </li>
+        <li class="numbered-item reveal">
+          <h3>Self-directed</h3>
+          <p>I am able to take initiative, look for answers on my own and move the work forward.</p>
+        </li>
+        <li class="numbered-item reveal">
+          <h3>Well organized</h3>
+          <p>I manage my time well and can concentrate on multiple projects at once.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <div class="reveal">
+        <p class="eyebrow"><span aria-hidden="true"></span>Languages</p>
+        <h2 class="section-title">Three languages, <span>one team.</span></h2>
+      </div>
+
+      <ul class="card-grid card-grid-3">
+        <li class="panel language-card reveal">
+          <h3>French</h3>
+          <p>Native speaker</p>
+        </li>
+        <li class="panel language-card reveal">
+          <h3>English</h3>
+          <p>B1 · Intermediate</p>
+        </li>
+        <li class="panel language-card reveal">
+          <h3>Spanish</h3>
+          <p>B1 · Intermediate</p>
+        </li>
+      </ul>
+    </section>
   </main>
 
   <footer>

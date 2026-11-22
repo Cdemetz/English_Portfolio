@@ -13,7 +13,9 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--color-bg);
+  color: var(--color-text-default);
   font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
 }
 
 main {
@@ -133,5 +135,22 @@ main {
 
   .blob-second {
     transform: translate(88vw, 72vh);
+  }
+}
+
+/* Visible keyboard focus on every link, button and form field */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-section-strong);
+  outline-offset: 3px;
+}
+
+/* Smooth scroll for in-page links, except for users who disable animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
