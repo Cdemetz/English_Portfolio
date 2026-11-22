@@ -1,0 +1,22 @@
+# Browser cache rules for the website (read by the Apache / LiteSpeed server
+# of Hostinger and OVH). Goal: visitors always get the latest version after
+# an update, without slowing down the site.
+
+# <IfModule>: the rules only apply if the server can send these headers,
+# so this file never breaks the site on a server that does not allow it.
+<IfModule mod_headers.c>
+
+  # Pages, styles, scripts and the CV: the browser keeps a copy, but always
+  # asks the server first if the file has changed. If it has not, the server
+  # answers "304 Not Modified" in a few bytes, so the site stays fast.
+  <FilesMatch "\.(html|css|js|pdf)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # Images and icons rarely change: kept for 7 days (604800 seconds).
+  # To update an image immediately, give the new file a new name.
+  <FilesMatch "\.(webp|jpg|jpeg|png|gif|svg|ico)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+</IfModule>
