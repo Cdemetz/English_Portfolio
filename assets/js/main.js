@@ -722,7 +722,7 @@ const openProject = (project) => {
   const intro = addElement(dialogBody, "div", "dialog-intro");
   addElement(intro, "p", "dialog-eyebrow", project.type + " · " + project.group);
   const title = addElement(intro, "h2", "dialog-title", project.title);
-  title.id = "dialog-title"; // the <dialog> is labelled by this title
+  title.id = "dialog-title"; // the <dialog> is labeled by this title
   addElement(intro, "p", "dialog-dates", project.date + " · " + project.time);
   addElement(intro, "p", "dialog-description", project.description);
   const tags = addElement(intro, "ul", "project-tags");
@@ -786,4 +786,142 @@ if (dialog) {
 
   window.addEventListener("hashchange", openFromHash); // click on a tile
   openFromHash(); // arrival from a home page card (work.html#project-3)
+}
+
+
+// ---------------------------------------------------------------
+// INTERESTS PAGE: PHOTO CAROUSEL (coverflow, infinite loop)
+// The strip of photos is a real horizontal scroll (CSS scroll snap):
+// swiping works natively on phones. This script:
+//  - copies all the photos once before and once after the real ones,
+//    so the last photo is already visible on the left of the first one;
+//  - when the scroll stops on a copy, jumps without animation to the
+//    real photo that looks exactly the same: the loop never ends;
+//  - marks the photo in the center (.is-active), updates the counter
+//    "06/15" and the progress bar, and adds arrows, keys and clicks.
+// ---------------------------------------------------------------
+const coverflow = document.querySelector(".coverflow");
+
+if (coverflow) {
+  const track = coverflow.querySelector(".coverflow-track");
+  const realSlides = [...track.querySelectorAll(".coverflow-slide")];
+  const total = realSlides.length;
+  const previousButton = coverflow.querySelector(".coverflow-previous");
+  const nextButton = coverflow.querySelector(".coverflow-next");
+  const progress = coverflow.querySelector(".coverflow-progress");
+  const status = coverflow.querySelector(".coverflow-status");
+  const counter = document.querySelector(".gallery-current");
+  const counterTotal = document.querySelector(".gallery-total");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // 1. Copies: [copies of 1..15] [real 1..15] [copies of 1..15]
+  const makeCopy = (slide) => {
+    const copy = slide.cloneNode(true);
+    copy.classList.add("is-copy");
+    copy.setAttribute("aria-hidden", "true"); // screen readers only read the real photos
+    return copy;
+  };
+  realSlides.forEach((slide) => track.append(makeCopy(slide))); // copies after
+  [...realSlides].reverse().forEach((slide) => track.prepend(makeCopy(slide))); // copies before
+  const slides = [...track.querySelectorAll(".coverflow-slide")]; // 3 × total
+
+  let activeIndex = -1; // position in "slides" (0 to 3 × total − 1)
+  const twoDigits = (number) => String(number).padStart(2, "0"); // 6 → "06"
+
+  // Horizontal position that puts a photo in the center of the strip
+  const centerOf = (slide) => slide.offsetLeft + slide.offsetWidth / 2 - track.clientWidth / 2;
+
+  // The photo whose center is the closest to the center of the strip
+  const findCenteredSlide = () => {
+    let closest = 0;
+    let smallestDistance = Infinity;
+    slides.forEach((slide, index) => {
+      const distance = Math.abs(centerOf(slide) - track.scrollLeft);
+      if (distance < smallestDistance) {
+        smallestDistance = distance;
+        closest = index;
+      }
+    });
+    return closest;
+  };
+
+  // Mark the active photo and update everything that depends on it
+  const setActive = (index) => {
+    if (index === activeIndex) return; // nothing changed
+    activeIndex = index;
+    const realIndex = index % total; // the same number for a photo and its copies
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("is-active", i === index);
+      slide.classList.toggle("is-before", i < index); // left of the center
+      slide.classList.toggle("is-after", i > index); // right of the center
+    });
+
+    counter.textContent = twoDigits(realIndex + 1);
+    progress.firstElementChild.style.transform = `translateX(${realIndex * 100}%)`;
+    const caption = slides[index].querySelector("figcaption").textContent;
+    status.textContent = `Photo ${realIndex + 1} of ${total}: ${caption}`;
+  };
+
+  // Scroll the strip so that a photo stops in the center
+  const goTo = (index, smooth = true) => {
+    const target = slides[Math.max(0, Math.min(index, slides.length - 1))];
+    track.scrollTo({ left: centerOf(target), behavior: smooth && !reduceMotion ? "smooth" : "auto" });
+  };
+
+  // 2. When the scroll stops on a copy: jump to the real photo, without animation.
+  //    The jump is exactly one set of photos wide, so nothing moves on screen.
+  const loopBack = () => {
+    let jump = 0;
+    if (activeIndex < total) jump = total; // on a copy before → real photo
+    else if (activeIndex >= total * 2) jump = -total; // on a copy after → real photo
+    if (jump === 0) return;
+
+    coverflow.classList.add("no-transition"); // the scale effect must not play during the jump
+    const setWidth = slides[total].offsetLeft - slides[0].offsetLeft;
+    track.scrollLeft += jump > 0 ? setWidth : -setWidth;
+    setActive(activeIndex + jump);
+    void coverflow.offsetWidth; // apply the styles now, before transitions come back
+    coverflow.classList.remove("no-transition");
+  };
+
+  // While scrolling: find the centered photo. When the scroll stops: loop back.
+  let stopTimer;
+  track.addEventListener("scroll", () => {
+    setActive(findCenteredSlide());
+    clearTimeout(stopTimer);
+    stopTimer = setTimeout(loopBack, 150); // no scroll for 150 ms = the scroll has stopped
+  }, { passive: true });
+
+  previousButton.addEventListener("click", () => goTo(activeIndex - 1));
+  nextButton.addEventListener("click", () => goTo(activeIndex + 1));
+
+  // Click on a side photo (real or copy): bring it to the center
+  slides.forEach((slide, index) => {
+    slide.addEventListener("click", () => {
+      if (index !== activeIndex) goTo(index);
+    });
+  });
+
+  // Keyboard: left and right arrows when the strip has the focus
+  track.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+      event.preventDefault(); // otherwise the browser scrolls by a few pixels only
+      goTo(activeIndex + (event.key === "ArrowRight" ? 1 : -1));
+    }
+  });
+
+  // Start: show the controls, then center the first REAL photo (index = total)
+  counterTotal.textContent = "/" + twoDigits(total);
+  progress.style.setProperty("--total", total);
+  previousButton.hidden = false;
+  nextButton.hidden = false;
+  coverflow.classList.add("is-ready", "no-transition");
+  track.scrollLeft = centerOf(slides[total]);
+  setActive(total);
+  void coverflow.offsetWidth;
+  coverflow.classList.remove("no-transition");
+
+  // A new screen size changes the widths: center the active photo again
+  window.addEventListener("resize", () => goTo(activeIndex, false));
 }

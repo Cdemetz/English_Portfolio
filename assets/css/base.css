@@ -154,3 +154,22 @@ textarea:focus-visible {
     scroll-behavior: smooth;
   }
 }
+
+/* Browser details themed with the site colors (selection, caret, scrollbar, underlines) */
+::selection {
+  background-color: var(--color-mist);
+  color: var(--color-ink);
+}
+
+input,
+textarea {
+  caret-color: var(--color-section-strong);
+}
+
+html {
+  scrollbar-color: var(--color-muted) var(--color-bg); /* thumb, track (Firefox and Chrome) */
+}
+
+a {
+  text-underline-offset: 0.2em;
+}

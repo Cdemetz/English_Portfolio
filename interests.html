@@ -39,11 +39,9 @@
   </header>
 
   <main>
-    <!-- TODO: background photo of the mountains (assets/img/interests/hero.webp):
-         replace the placeholder <div> with
-         <img class="interests-hero-image" src="assets/img/interests/hero.webp" alt=""> -->
     <section class="interests-hero">
-      <div class="interests-hero-image photo-placeholder" aria-hidden="true"></div>
+      <img class="interests-hero-image" src="assets/img/interest/massif-montagneux.webp" width="2000" height="1333"
+        alt="Snowy peaks glowing pink at sunrise above a dark valley" fetchpriority="high">
       <div class="interests-hero-text">
         <p class="eyebrow"><span aria-hidden="true"></span>Beyond the screen</p>
         <h1>Powered by <span>the outdoors.</span></h1>
@@ -62,18 +60,153 @@
         </div>
       </div>
 
-      <div class="photo-grid">
-        <!-- TODO: replace both placeholders with my own photos
-             (assets/img/interests/skiing.webp and assets/img/interests/filming.webp) -->
-        <figure class="photo-main reveal">
-          <div class="photo-placeholder" role="img" aria-label="Freeride skiing in Portes du Soleil (photo coming soon)">
-          </div>
-          <figcaption>Freeride skiing <span>Portes du Soleil · Winter</span></figcaption>
-        </figure>
-        <figure class="photo-side reveal">
-          <div class="photo-placeholder" role="img" aria-label="Filming in the mountains (photo coming soon)"></div>
-          <figcaption>Mountain photo &amp; video <span>Year round</span></figcaption>
-        </figure>
+    </section>
+
+    <!-- Photo carousel. Without JavaScript it is a simple strip of photos that
+         scrolls sideways; main.js adds the arrows, the counter and the 3D effect. -->
+    <section class="section gallery" aria-labelledby="gallery-title">
+      <div class="gallery-header reveal">
+        <div>
+          <p class="eyebrow"><span aria-hidden="true"></span>Photo &amp; video</p>
+          <h2 class="section-title" id="gallery-title">Frames from the mountains <span>and the ocean.</span></h2>
+        </div>
+        <p class="gallery-counter" aria-hidden="true">
+          <span class="gallery-current">01</span><span class="gallery-total">/15</span>
+        </p>
+      </div>
+
+      <div class="coverflow" role="region" aria-roledescription="carousel" aria-label="Photo gallery">
+        <ul class="coverflow-track" tabindex="0" aria-label="Photos, use the arrow keys to browse">
+          <li class="coverflow-slide">
+            <figure>
+              <img class="focus-right" src="assets/img/interest/skieur-soleil.webp" width="1600" height="1067"
+                alt="Skier with red-tinted goggles taking a break in the sun, snowy peaks behind" decoding="async">
+              <figcaption>Sun break</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/cervin-photo.webp" width="1067" height="1600"
+                alt="The snowy summit of the Matterhorn against a deep blue sky, framed by pine branches"
+                decoding="async">
+              <figcaption>Matterhorn</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/surf.webp" width="1600" height="1067"
+                alt="Black-and-white photo of a surfer carving a breaking wave" decoding="async">
+              <figcaption>Carving</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/ski-professionel-figure.webp" width="1600" height="1066"
+                alt="Freestyle skier flipping in mid-air above a snowy slope" loading="lazy" decoding="async">
+              <figcaption>Freestyle</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/photo-montagne-enneiger.webp" width="1067" height="1600"
+                alt="Last light turning a snowy summit orange at dusk" loading="lazy" decoding="async">
+              <figcaption>Last light</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/plage-noiretblanc.webp" width="1600" height="1067"
+                alt="Black-and-white beach with two surfers walking below a dark cliff" loading="lazy"
+                decoding="async">
+              <figcaption>Low tide</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/skieur-arbres.webp" width="1600" height="1067"
+                alt="Skier holding his skis between two larch trees, snowy mountains behind" loading="lazy"
+                decoding="async">
+              <figcaption>Larches</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img class="focus-left" src="assets/img/interest/massif-mont-blanc.webp" width="1600" height="1067"
+                alt="Black-and-white view of the jagged peaks of the Mont Blanc massif in the clouds, with a drone flying nearby"
+                loading="lazy" decoding="async">
+              <figcaption>Mont Blanc</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/portrait-surf.webp" width="1067" height="1600"
+                alt="Black-and-white portrait of a surfer holding his board, another surfer walking on the beach behind"
+                loading="lazy" decoding="async">
+              <figcaption>Before the session</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/athlete-pro.webp" width="1067" height="1600"
+                alt="Skier in a red jacket and black helmet looking over snowy mountains" loading="lazy"
+                decoding="async">
+              <figcaption>Summit view</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/surf-paysage.webp" width="1600" height="1067"
+                alt="Sandy beach and turquoise waves seen through pine branches" loading="lazy" decoding="async">
+              <figcaption>Coastline</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/skieur-detail-remontermecaniques.webp" width="1600" height="1067"
+                alt="Skier in an orange jacket and white helmet in front of a chairlift at golden hour" loading="lazy"
+                decoding="async">
+              <figcaption>Golden hour</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/surf-froid.webp" width="1067" height="1600"
+                alt="Lone surfer walking on a wet beach below a towering cliff, in cold blue light" loading="lazy"
+                decoding="async">
+              <figcaption>Cold water</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img src="assets/img/interest/ski-composition.webp" width="2086" height="1179"
+                alt="Aerial view of skiers and snowboarders in a snow park" loading="lazy" decoding="async">
+              <figcaption>Snow park</figcaption>
+            </figure>
+          </li>
+          <li class="coverflow-slide">
+            <figure>
+              <img class="focus-right" src="assets/img/interest/bateau.webp" width="1600" height="1067"
+                alt="Man laughing on a boat at sunset, with waves behind him" loading="lazy" decoding="async">
+              <figcaption>Sunset ride</figcaption>
+            </figure>
+          </li>
+        </ul>
+
+        <!-- Arrows and progress bar: hidden until main.js is ready -->
+        <button class="coverflow-arrow coverflow-previous" type="button" aria-label="Previous photo" hidden>
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <button class="coverflow-arrow coverflow-next" type="button" aria-label="Next photo" hidden>
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+        <div class="coverflow-progress" aria-hidden="true"><span></span></div>
+        <p class="visually-hidden coverflow-status" aria-live="polite"></p>
       </div>
     </section>
 
@@ -87,7 +220,7 @@
         <li class="numbered-item reveal">
           <h3>Photo &amp; video</h3>
           <p>Self-taught mountain photography and filming. For two years, I have been making ski-season films for my
-            friends: shooting, editing, choosing the soundtrack and colour grading.</p>
+            friends: shooting, editing, choosing the soundtrack and color grading.</p>
         </li>
         <li class="numbered-item reveal">
           <h3>Downhill mountain biking &amp; freeride skiing</h3>

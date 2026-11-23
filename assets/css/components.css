@@ -271,8 +271,9 @@ footer {
 .footer-heading {
     margin: 0 0 var(--space-xl);
     font-size: var(--font-size-display);
-    font-weight: 400;
+    font-weight: var(--font-weight-bold); /* same title style as every page */
     line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-title);
 }
 
 /* Highlighted word in the heading ("meaningful.") */
@@ -538,19 +539,17 @@ h1 span,
 /* Elements that fade in when they enter the screen (class added by main.js).
    Only when JavaScript works: without it, everything stays visible. */
 .js .reveal {
-    opacity: 0;
-    transform: translateY(var(--space-lg));
-    transition: opacity 0.7s ease, transform 0.7s var(--transition-ease);
+    /* only a short slide up: the content is never invisible, even for an instant */
+    transform: translateY(var(--space-md));
+    transition: transform 0.9s var(--transition-ease);
 }
 
 .js .reveal.is-visible {
-    opacity: 1;
     transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
     .js .reveal {
-        opacity: 1;
         transform: none;
         transition: none;
     }
@@ -1690,11 +1689,15 @@ body:has(.project-dialog[open]) {
 }
 
 .profile {
+    width: 100%;
+    max-width: var(--profile-photo-width); /* the photo stays a reasonable size */
     margin: 0;
+    justify-self: center;
 }
 
 .profile-photo {
     width: 100%;
+    height: auto; /* otherwise the height="1200" of the HTML wins over aspect-ratio */
     aspect-ratio: 0.84;
     object-fit: cover;
     border-radius: var(--card-radius);
@@ -1722,6 +1725,7 @@ body:has(.project-dialog[open]) {
 }
 
 .story-copy > p {
+    max-width: 65ch; /* comfortable line length */
     font-size: var(--font-size-md);
     line-height: var(--line-height-text);
 }
@@ -2019,7 +2023,6 @@ html:not(.js) .skill-bar-fill {
 .interest-lead {
     display: grid;
     grid-template-columns: var(--space-xxl) 1fr;
-    margin-bottom: var(--space-xl);
 }
 
 .interest-lead .section-title {
@@ -2032,53 +2035,241 @@ html:not(.js) .skill-bar-fill {
     font-size: var(--font-size-xs);
 }
 
-/* Two photos: a big one and a smaller one placed lower */
-.photo-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    gap: var(--space-md);
-    align-items: start;
+/* ---------- Interests: photo carousel (coverflow) ----------
+   MOBILE FIRST (asked for this component): the base styles are for phones,
+   a min-width media query adds the 3D effect on bigger screens.
+   How it works: the track is a real horizontal scroll with "scroll snap",
+   so swiping works natively on phones and nothing is hidden without
+   JavaScript. main.js only adds the arrows, the counter and marks the
+   photo in the center (.is-active) to make it bigger. */
+
+/* The gallery continues the "Mountain life" section: no extra space on top */
+.gallery {
+    padding-top: 0;
 }
 
-.photo-grid figure {
-    margin: 0;
-}
-
-.photo-grid .photo-placeholder,
-.photo-grid img {
-    width: 100%;
-    border-radius: var(--card-radius);
-    object-fit: cover;
-}
-
-.photo-main .photo-placeholder,
-.photo-main img {
-    height: clamp(320px, 45vw, 600px);
-}
-
-.photo-side {
-    margin-top: var(--space-xxl);
-}
-
-.photo-side .photo-placeholder,
-.photo-side img {
-    height: clamp(260px, 32vw, 420px);
-}
-
-.photo-grid figcaption {
+/* Title on the left, counter "06/16" on the right, line under both */
+.gallery-header {
     display: flex;
+    align-items: flex-end;
     justify-content: space-between;
     gap: var(--space-md);
-    margin-top: var(--space-sm);
-    color: var(--color-ink);
-    font-size: var(--font-size-sm);
-    font-weight: 600;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-line);
 }
 
-.photo-grid figcaption span {
+.gallery-header .section-title {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+}
+
+.gallery-counter {
+    flex-shrink: 0;
+    margin: 0;
+    color: var(--color-ink);
+    font-size: var(--font-size-lg);
+    font-variant-numeric: tabular-nums; /* digits of equal width: the counter does not jump */
+}
+
+.gallery-total {
     color: var(--color-muted);
-    font-size: var(--font-size-xs);
-    font-weight: 500;
+}
+
+.coverflow {
+    position: relative;
+}
+
+/* The strip of photos. The side padding (half the screen minus half a
+   photo) lets the first and the last photo stop in the center. */
+.coverflow-track {
+    position: relative; /* offsetLeft of the slides is measured from here */
+    display: flex;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: var(--space-lg) calc(50% - var(--coverflow-slide-width) / 2);
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* always stops on a photo */
+    overscroll-behavior-x: contain; /* a swipe never moves the page back */
+    scrollbar-width: none; /* hidden scrollbar (Firefox) */
+}
+
+.coverflow-track::-webkit-scrollbar {
+    display: none; /* hidden scrollbar (Chrome, Safari) */
+}
+
+.coverflow-slide {
+    flex: 0 0 var(--coverflow-slide-width);
+    scroll-snap-align: center;
+}
+
+.coverflow-slide figure {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 3 / 4; /* every photo in the same portrait frame */
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    background-color: var(--color-mist);
+    box-shadow: var(--card-shadow);
+}
+
+.coverflow-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fills the frame, crops the edges */
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Where to crop landscape photos (the subject is not always centered) */
+.coverflow-slide img.focus-left {
+    object-position: 30% 50%;
+}
+
+.coverflow-slide img.focus-right {
+    object-position: 72% 50%;
+}
+
+/* Big word on the photo, on a dark gradient so it stays readable */
+.coverflow-slide figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: var(--space-xl) var(--space-md) var(--space-md);
+    background: var(--color-caption-overlay);
+    color: var(--color-white);
+    font-size: clamp(1.5rem, 6vw, 2.25rem);
+    font-weight: 600;
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.03em;
+}
+
+/* ----- Added by main.js (.is-ready) ----- */
+
+/* Side photos smaller and lighter; the one in the center is full size */
+.coverflow.is-ready .coverflow-slide figure {
+    transform: scale(var(--coverflow-side-scale));
+    opacity: 0.6;
+    transition: transform var(--coverflow-duration) var(--transition-ease),
+        opacity var(--coverflow-duration) var(--transition-ease);
+}
+
+.coverflow.is-ready .coverflow-slide.is-active figure {
+    transform: none;
+    opacity: 1;
+}
+
+/* Instant jump of the infinite loop: no animation during the jump */
+.coverflow.no-transition .coverflow-slide figure {
+    transition: none;
+}
+
+/* A side photo can be clicked to bring it to the center */
+.coverflow.is-ready .coverflow-slide:not(.is-active) {
+    cursor: pointer;
+}
+
+/* Round glass arrows on both sides */
+.coverflow-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: var(--coverflow-arrow-size);
+    height: var(--coverflow-arrow-size);
+    padding: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    background-color: var(--color-glass);
+    box-shadow: var(--card-shadow);
+    color: var(--color-ink);
+    cursor: pointer;
+    translate: 0 -50%;
+    -webkit-backdrop-filter: blur(var(--space-sm));
+    backdrop-filter: blur(var(--space-sm));
+    transition: background-color var(--transition-duration) var(--transition-ease),
+        color var(--transition-duration) var(--transition-ease),
+        opacity var(--transition-duration) var(--transition-ease);
+}
+
+.coverflow-arrow[hidden] {
+    display: none; /* "display: grid" above would otherwise beat the hidden attribute */
+}
+
+.coverflow-arrow:hover,
+.coverflow-arrow:focus-visible {
+    background-color: var(--color-ink);
+    color: var(--color-white);
+}
+
+.coverflow-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+}
+
+.coverflow-previous {
+    left: 0;
+}
+
+.coverflow-next {
+    right: 0;
+}
+
+/* Thin bar under the photos: the dark part moves with the current photo */
+.coverflow-progress {
+    position: relative;
+    width: min(160px, 40%);
+    height: 3px;
+    margin: 0 auto;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-line);
+    overflow: hidden;
+}
+
+.coverflow:not(.is-ready) .coverflow-progress {
+    display: none; /* useless without JavaScript */
+}
+
+.coverflow-progress span {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: calc(100% / var(--total, 1));
+    border-radius: var(--radius-pill);
+    background-color: var(--color-ink);
+    transition: transform var(--coverflow-duration) var(--transition-ease);
+}
+
+/* Bigger screens: bigger photos, and the side photos turn in 3D
+   towards the center, like an album "coverflow" */
+@media (min-width: 768px) {
+    .coverflow {
+        --coverflow-slide-width: var(--coverflow-slide-width-desktop);
+    }
+
+    .coverflow-previous {
+        left: var(--space-md);
+    }
+
+    .coverflow-next {
+        right: var(--space-md);
+    }
+
+    .coverflow.is-ready .coverflow-slide.is-before figure {
+        transform: perspective(900px) rotateY(var(--coverflow-side-rotate)) scale(var(--coverflow-side-scale));
+    }
+
+    .coverflow.is-ready .coverflow-slide.is-after figure {
+        transform: perspective(900px) rotateY(calc(var(--coverflow-side-rotate) * -1)) scale(var(--coverflow-side-scale));
+    }
+}
+
+/* Accessibility: no movement for users who disable animations */
+@media (prefers-reduced-motion: reduce) {
+    .coverflow.is-ready .coverflow-slide figure,
+    .coverflow-progress span {
+        transition: none;
+    }
 }
 
 
@@ -2302,8 +2493,7 @@ html:not(.js) .skill-bar-fill {
     .skill-bars,
     .card-grid-2,
     .card-grid-3,
-    .field-row,
-    .photo-grid {
+    .field-row {
         grid-template-columns: 1fr;
     }
 
@@ -2356,10 +2546,6 @@ html:not(.js) .skill-bar-fill {
 
     .interest-lead {
         grid-template-columns: var(--space-lg) 1fr;
-    }
-
-    .photo-side {
-        margin-top: 0;
     }
 
     .contact-form {

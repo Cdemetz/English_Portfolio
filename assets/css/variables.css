@@ -8,7 +8,7 @@
   --color-text-hovered: #1f3b78;
   --color-footer-bg: #14285a;
   --color-footer-strong: #8aabf9;
-  --color-header-butt-contact:rgba(10, 22, 48, 1);
+  --color-header-butt-contact: var(--color-ink); /* same dark navy as the titles (one single value) */
   --color-section-strong:#2f5bd3;
 
   /* Colors from the Figma mock-up (pages About, Experience, Interests, Contact) */
@@ -47,7 +47,7 @@
   --font-size-intro: 1.125rem;                  /* lead paragraph under a page title */
   --line-height-title: 0.95;
   --line-height-text: 1.65;
-  --letter-spacing-title: -0.055em;             /* tight titles, like the mock-up */
+  --letter-spacing-title: -0.04em;              /* tight titles, like the mock-up (tighter makes letters touch) */
   --font-weight-bold: 700;
   --line-height-tight: 1.1;
   --letter-spacing-wide: 0.12em;
@@ -63,6 +63,7 @@
   /* Shapes */
   --radius-pill: 999px;
   --radius-panel: 20px;                         /* cards of the About / Experience / Contact pages */
+  --profile-photo-width: 360px;                /* About page photo */
 
   /* Layout */
   --content-max: 1240px;                        /* max width of the page content */
@@ -72,6 +73,15 @@
   --skill-bar-height: 4px;
   --timeline-dot-size: 13px;
   --icon-button-size: 42px;
+
+  /* Interests: photo carousel */
+  --coverflow-slide-width: min(72vw, 300px);          /* phones */
+  --coverflow-slide-width-desktop: min(34vw, 380px);  /* 768px and more */
+  --coverflow-side-scale: 0.82;                       /* size of the photos next to the center one */
+  --coverflow-side-rotate: 22deg;                     /* 3D turn of the side photos (desktop) */
+  --coverflow-arrow-size: 44px;                       /* big enough for a finger */
+  --coverflow-duration: 0.5s;
+  --color-caption-overlay: linear-gradient(to top, rgba(5, 12, 28, 0.6), transparent);
 
   /* Project cards */
   /* 3 full cards + half of the 4th on any screen: (screen - side spaces) / 3.5, between 320px and 500px */
