@@ -807,6 +807,51 @@ h1 span,
   justify-content: safe center; /* "safe": if it does not fit, keep the title visible */
 }
 
+/* Phones and tablets: no pinned section. The row of cards becomes a real
+   horizontal scroll that the finger swipes directly (smooth and native),
+   and each card stops neatly at the left edge (scroll snap). */
+@media (max-width: 768px) {
+    .projects-preview-sticky {
+        position: static;
+        height: auto;
+        overflow: visible;
+        padding-top: var(--space-xl);
+    }
+
+    .projects-preview-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .projects-preview-grid {
+        position: relative; /* keeps the hidden screen-reader texts of the cards inside the row (no page overflow) */
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--page-gutter); /* the snapped card keeps the page margin */
+        overscroll-behavior-x: contain;            /* a swipe never triggers "back" in the browser */
+        scrollbar-width: none;                     /* Firefox: hide the scrollbar */
+        gap: var(--space-md);
+        padding: var(--space-md) var(--page-gutter) var(--space-lg);
+    }
+
+    .projects-preview-grid::-webkit-scrollbar {
+        display: none; /* Chrome and Safari: hide the scrollbar */
+    }
+
+    .project-card,
+    .projects-view-all {
+        scroll-snap-align: start;
+    }
+
+    .project-card {
+        width: var(--card-width-mobile);
+    }
+
+    .projects-view-all {
+        padding: 0 var(--space-lg);
+    }
+}
+
 /* "…" tag when a card has more than 3 technologies */
 .project-tag-more {
     border-style: dashed;
@@ -2501,8 +2546,9 @@ html:not(.js) .skill-bar-fill {
         gap: 0;
     }
 
-    .profile-photo {
-        max-height: 480px;
+    /* Phone: the photo is centered above the text, smaller than on computer */
+    .profile {
+        max-width: var(--profile-photo-width-mobile);
     }
 
     /* Timeline: dot on the left, date above the content */

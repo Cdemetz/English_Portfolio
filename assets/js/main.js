@@ -492,8 +492,18 @@ const section = document.querySelector(".projects-preview");
 // Number of pixels the cards must travel until the last one is visible
 let distance = 0;
 
+// Same breakpoint as the CSS: on phones and tablets the cards are swiped
+// natively (CSS scroll snap), so this pinned effect is switched off.
+const smallScreen = window.matchMedia("(max-width: 768px)");
+
+// Last known screen width: on phones, the address bar that hides/shows
+// fires "resize" (height only) while scrolling. Ignoring it avoids jumps.
+let lastWidth = window.innerWidth;
+
 // Move the cards according to how far we have scrolled inside the section
 const moveCards = () => {
+  if (smallScreen.matches) return; // native swipe on small screens
+
   // top of the section relative to the top of the screen:
   // 0 when it reaches the top, then -100, -200... as we keep scrolling
   const scrolled = -section.getBoundingClientRect().top;
@@ -506,6 +516,15 @@ const moveCards = () => {
 
 // Measure the cards and give the section the height needed to scroll through them
 const setupHorizontalScroll = () => {
+  lastWidth = window.innerWidth;
+
+  // Small screen: normal section height, no transform (the CSS handles the swipe)
+  if (smallScreen.matches) {
+    section.style.height = "";
+    grid.style.transform = "";
+    return;
+  }
+
   // full width of the row of cards - visible width
   // (scrollWidth forgets the right padding, so we add it back:
   // the last card then stops with the same gap as the first one)
@@ -521,8 +540,13 @@ const setupHorizontalScroll = () => {
 if (section && grid) {
   setupHorizontalScroll();
   window.addEventListener("load", setupHorizontalScroll);   // fonts and images change the widths
-  window.addEventListener("resize", setupHorizontalScroll); // new screen size = new distance
-  window.addEventListener("scroll", moveCards);
+  // new screen width = new distance (a height-only change is the mobile address bar: ignored)
+  window.addEventListener("resize", () => {
+    const touchScreen = window.matchMedia("(pointer: coarse)").matches;
+    if (!touchScreen || window.innerWidth !== lastWidth) setupHorizontalScroll();
+  });
+  smallScreen.addEventListener("change", setupHorizontalScroll); // e.g. a tablet turned sideways
+  window.addEventListener("scroll", moveCards, { passive: true });
 }
 
 

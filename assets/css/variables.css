@@ -63,7 +63,8 @@
   /* Shapes */
   --radius-pill: 999px;
   --radius-panel: 20px;                         /* cards of the About / Experience / Contact pages */
-  --profile-photo-width: 360px;                /* About page photo */
+  --profile-photo-width: 320px;                /* About page photo (computer) */
+  --profile-photo-width-mobile: 240px;         /* About page photo (phone) */
 
   /* Layout */
   --content-max: 1240px;                        /* max width of the page content */
@@ -86,6 +87,7 @@
   /* Project cards */
   /* 3 full cards + half of the 4th on any screen: (screen - side spaces) / 3.5, between 320px and 500px */
   --card-width: clamp(320px, calc((100vw - 10rem) / 3.5), 500px);
+  --card-width-mobile: 78vw;             /* phone: one card + the edge of the next one, a hint to swipe */
   --card-media-height: min(220px, 18vh); /* smaller image on short screens */
   --card-radius: 24px;
   --color-card-bg: #ffffff;
