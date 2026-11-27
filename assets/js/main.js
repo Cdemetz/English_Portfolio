@@ -64,32 +64,55 @@ if ("IntersectionObserver" in window) {
 
 // ---------------------------------------------------------------
 // CONTACT FORM
-// send-message.php comes back to contact.html?status=... : we show
-// the matching message. We also note when the form was displayed
-// (robots send it in less than a few seconds).
+// The form is sent to Web3Forms in the background (fetch), so the
+// visitor stays on the page and sees the result above the form.
+// Without JavaScript, the form still works: the browser opens the
+// Web3Forms confirmation page instead.
 // ---------------------------------------------------------------
 const contactForm = document.querySelector(".contact-form");
 const formStatus = document.querySelector(".form-status");
 
 const FORM_MESSAGES = {
+  sending: { text: "Sending your message...", type: "is-success" },
   sent: { text: "Thank you! Your message has been sent. I will get back to you soon.", type: "is-success" },
-  invalid: { text: "Some fields are missing or incorrect. Please check them and try again.", type: "is-error" },
-  wait: { text: "Please wait a minute before sending another message.", type: "is-error" },
   error: { text: "Sorry, the message could not be sent. Please email me directly.", type: "is-error" },
 };
 
+function showFormStatus(status) {
+  const message = FORM_MESSAGES[status];
+  formStatus.textContent = message.text; // textContent: never interpreted as HTML
+  formStatus.classList.remove("is-success", "is-error");
+  formStatus.classList.add(message.type);
+  formStatus.hidden = false;
+}
+
 if (contactForm && formStatus) {
-  contactForm.elements.started.value = Math.floor(Date.now() / 1000); // seconds
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault(); // stay on the page
+    const button = contactForm.querySelector("button[type='submit']");
+    button.disabled = true; // no double sending
+    showFormStatus("sending");
 
-  const status = new URLSearchParams(window.location.search).get("status");
-  const message = FORM_MESSAGES[status]; // undefined if the status is unknown
+    try {
+      const response = await fetch(contactForm.action, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(contactForm),
+      });
+      const result = await response.json();
 
-  if (message) {
-    formStatus.textContent = message.text; // textContent: never interpreted as HTML
-    formStatus.classList.add(message.type);
-    formStatus.hidden = false;
-    if (status === "sent") contactForm.reset();
-  }
+      if (result.success) {
+        showFormStatus("sent");
+        contactForm.reset();
+      } else {
+        showFormStatus("error");
+      }
+    } catch {
+      showFormStatus("error"); // no internet connection or service down
+    }
+
+    button.disabled = false;
+  });
 }
 
 // ---------------------------------------------------------------
@@ -307,7 +330,7 @@ const projects = [
     time: "1 month",
     title: "Personal Portfolio Website",
     description: "This website: a hand-coded portfolio in HTML, CSS and vanilla JavaScript, built to present my work to international recruiters.",
-    technologies: [TECH.html, TECH.css, TECH.js, TECH.php, TECH.figma],
+    technologies: [TECH.html, TECH.css, TECH.js, TECH.figma],
     type: "University project – English module",
     group: "Solo project",
 
